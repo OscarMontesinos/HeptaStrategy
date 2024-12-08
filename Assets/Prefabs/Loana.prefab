@@ -91,6 +91,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4042244713431347903, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
   m_PrefabInstance: {fileID: 4487689534776536686}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1820185482305993809 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2811900758746468927, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+  m_PrefabInstance: {fileID: 4487689534776536686}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3009964785529873863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1694183438789544873, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+  m_PrefabInstance: {fileID: 4487689534776536686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4487689533072906007 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1738242425, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
@@ -119,18 +129,26 @@ MonoBehaviour:
     turn: 5
     mHp: 45
     hp: 0
+    pot: 0
     shield: 0
     sinergy: 25
     strength: 5
     control: 25
-    fDef: 25
-    mDef: 25
+    fRes: 25
+    mRes: 25
+    res: 0
     spd: 10
     movement: 4
+  buffList: []
+  invocationList: []
+  isStuned: 0
+  wasJustStuned: 0
   turno: 0
   habSelected: 0
   turnIndicator: {fileID: 8901249484603620929}
   hSelectedIndicator: {fileID: 6334909021977349656}
+  stunIndicator: {fileID: 3009964785529873863}
+  justStunIndicator: {fileID: 1820185482305993809}
   hpBar: {fileID: 7655219748454153569}
   shieldBar: {fileID: 6065067859835644749}
   hpText: {fileID: 9115328730815950100}
@@ -139,10 +157,38 @@ MonoBehaviour:
   areaIndicator: {fileID: 459237404752043217}
   extensionIndicator: {fileID: 4487689533072906007}
   pAmount: 55
+  h1MaxRTimes: 2
   h1Turn: 2
   h1Range: 1
   h1Dmg: 50
   h1ExtraDmg: 45
+  h2Cd: 1
+  h2Turn: 2
+  h2Range: 5
+  h2Wide: 3
+  h2Dmg: 40
+  h2ExtraDmg: 45
+  h2StatsToChange:
+    pot: 60
+    res: 0
+    spd: 0
+    movement: 0
+  h2Duration: 2
+  h3Cd: 5
+  h3Turn: 3
+  h3Area: 5
+  h3Duration: 3
+  h3Bubble: {fileID: 3312770111448397337, guid: 9fa9893661f983b42b702ad2f1fa846b, type: 3}
+  h4Cd: 1
+  h4Turn: 2
+  h4Pasive: 0
+  h4Stun: 0
+  h4StatsToChange:
+    pot: 0
+    res: 160
+    spd: 0
+    movement: 0
+  h4Duration: 1
 --- !u!114 &6065067859835644749 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7668516151738205475, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}

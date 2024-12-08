@@ -12,12 +12,16 @@ public class Stats
     [HideInInspector]
     public float hp;
     [HideInInspector]
+    public float pot;
+    [HideInInspector]
     public float shield;
     public float sinergy;
     public float strength;
     public float control;
-    public float fDef;
-    public float mDef;
+    public float fRes;
+    public float mRes;
+    [HideInInspector]
+    public float res;
     public float spd;
     public int movement;
 }

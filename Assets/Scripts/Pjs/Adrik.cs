@@ -16,11 +16,15 @@ public class Adrik : PjBase
     int pAmount;
     public float pMaxMultiplier;
     public float pMinMultiplier;
+    public int h1MaxRTimes;
+    int h1CurrentTimes;
     public int h1Flames;
     public int h1Turn;
     public int h1Range;
     public int h1Area;
     public float h1Dmg;
+    public int h2Cd;
+    int h2CurrentCd;
     public int h2Flames;
     public int h2Turn;
     public int h2Range;
@@ -34,6 +38,8 @@ public class Adrik : PjBase
     public int h3Area;
     public float h3Dmg;
     float h3ActualDmg;
+    public int h4Cd;
+    int h4CurrentCd;
     public int h4Turn;
     public int h4Range;
     public int h4Flames;
@@ -48,7 +54,7 @@ public class Adrik : PjBase
     }
     public override float CalculateSinergy(float value)
     {
-        return value * (Mathf.Lerp(pMinMultiplier, pMaxMultiplier, Mathf.InverseLerp(0, pMAmount, pAmount)) * stats.sinergy) / 100;
+        return value * (Mathf.Lerp(pMinMultiplier, pMaxMultiplier, Mathf.InverseLerp(0, pMAmount, pAmount)) * (stats.sinergy + stats.pot)) / 100;
     }
     public override void GetTurn()
     {
@@ -90,7 +96,7 @@ public class Adrik : PjBase
                                     isAttack = true;
                                     DealDmg(target, DmgType.magical, CalculateSinergy(h1Dmg));
                                 }
-                                else  if (target.hSelected && target == this)
+                                else if (target.hSelected && target == this)
                                 {
                                     pAmount = pMAmount;
                                     stats.turn -= h1Turn;
@@ -109,6 +115,7 @@ public class Adrik : PjBase
                         flamesBar.value = pAmount;
                         flamesText.text = (Mathf.Lerp(pMinMultiplier, pMaxMultiplier, Mathf.InverseLerp(0, pMAmount, pAmount)) * stats.sinergy).ToString("F0");
                         habSelected = 0;
+                        h1CurrentTimes--;
                         GameManager.Instance.UnselectAll();
                         DisableIndicators();
                         break;
@@ -129,6 +136,7 @@ public class Adrik : PjBase
                         flamesText.text = (Mathf.Lerp(pMinMultiplier, pMaxMultiplier, Mathf.InverseLerp(0, pMAmount, pAmount)) * stats.sinergy).ToString("F0");
                         stats.turn -= h2Turn;
                         habSelected = 0;
+                        h2CurrentCd = h2Cd + 1;
                         GameManager.Instance.UnselectAll();
                         DisableIndicators();
                         break;
@@ -157,7 +165,7 @@ public class Adrik : PjBase
                     case 4:
                         transform.position = UtilsClass.GetMouseWorldPosition();
                         pAmount += h4Flames;
-                        if(pAmount > pMAmount)
+                        if (pAmount > pMAmount)
                         {
                             pAmount = pMAmount;
                         }
@@ -165,62 +173,149 @@ public class Adrik : PjBase
                         flamesText.text = (Mathf.Lerp(pMinMultiplier, pMaxMultiplier, Mathf.InverseLerp(0, pMAmount, pAmount)) * stats.sinergy).ToString("F0");
                         stats.turn -= h4Turn;
                         habSelected = 0;
+                        h4CurrentCd = h4Cd + 1;
                         GameManager.Instance.UnselectAll();
                         DisableIndicators();
                         break;
                 }
             }
 
+            UpdateUI();
+
+            ManageHabCDsUI();
+
+            ManageHabInputs();
+
+            ManageHabIndicators();
+        }
+    }
+    public override void ManageHabCDs()
+    {
+        h1CurrentTimes = h1MaxRTimes;
+
+        if(h2CurrentCd > 0)
+        {
+            h2CurrentCd--;
+        }
+
+        if(h4CurrentCd > 0)
+        {
+            h4CurrentCd--;
+        }
+    }
+
+    public override void ManageHabCDsUI()
+    {
+        UIManager.Instance.habIndicator1.UpdateHab(HabIndicator.CdType.maxR, h1CurrentTimes);
+
+        UIManager.Instance.habIndicator2.UpdateHab(HabIndicator.CdType.cd, h2CurrentCd);
+
+        if (h3ActualSun) UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.unactive, 0);
+        else UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.none, 0);
+
+        UIManager.Instance.habIndicator4.UpdateHab(HabIndicator.CdType.cd, h4CurrentCd);
+    }
+
+    public override void ManageHabInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && stats.turn >= h1Turn && h1CurrentTimes >0)
+        {
+            SelectHab(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && stats.turn >= h2Turn && pAmount >= h2Flames && h2CurrentCd <= 0)
+        {
+            SelectHab(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) && stats.turn >= h3Turn && pAmount >= h3Flames && h3ActualSun == null)
+        {
+            SelectHab(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4) && stats.turn >= h4Turn && pAmount >= h4Flames && h4CurrentCd <= 0)
+        {
+            SelectHab(4);
+        }
+    }
 
 
 
-            if (Input.GetKeyDown(KeyCode.Alpha1) && stats.turn >= h1Turn)
-            {
-                SelectHab(1);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2) && stats.turn >= h2Turn && pAmount >= h2Flames)
-            {
-                SelectHab(2);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3) && stats.turn >= h3Turn && pAmount >= h3Flames && h3ActualSun == null)
-            {
-                SelectHab(3);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4) && stats.turn >= h4Turn && pAmount >= h4Flames)
-            {
-                SelectHab(4);
-            }
+    public override void ManageHabIndicators()
+    {
+        switch (habSelected)
+        {
+            default:
+                GameManager.Instance.UnselectAll();
+                break;
 
-            switch (habSelected)
-            {
-                default:
-                    GameManager.Instance.UnselectAll();
-                    break;
+            case 1:
+                if (GameManager.Instance.selectedCell == new Vector2(transform.position.x, transform.position.y))
+                {
+                    DisableIndicators();
+                    HabSelectSingle(HabTargetType.ally, h1Range, transform.position);
+                }
+                else
+                {
+                    HabSelectArea(HabTargetType.enemy, h1Range, h1Area, transform.position);
+                }
+                break;
 
-                case 1:
-                    if(GameManager.Instance.selectedCell == new Vector2(transform.position.x, transform.position.y))
-                    {
-                        DisableIndicators();
-                        HabSelectSingle(HabTargetType.ally,h1Range,transform.position);
-                    }
-                    else
-                    {
-                        HabSelectArea(HabTargetType.enemy, h1Range, h1Area, transform.position);
-                    }
-                    break;
+            case 2:
+                HabSelectExtension(HabTargetType.enemy, h2Range, h2Wide, transform.position);
+                break;
 
-                case 2:
-                    HabSelectExtension(HabTargetType.enemy, h2Range, h2Wide, transform.position);
-                    break;
+            case 3:
+                HabSelectArea(HabTargetType.enemy, h3Range, h3Area, transform.position);
+                break;
 
-                case 3:
-                    HabSelectArea(HabTargetType.enemy, h3Range, h3Area, transform.position);
-                    break;
+            case 4:
+                HabSelectSingle(HabTargetType.none, h4Range, transform.position);
+                break;
+        }
+    }
 
-                case 4:
-                    HabSelectSingle(HabTargetType.none, h4Range, transform.position);
-                    break;
-            }
+
+    public override string GetHabName(int hab)
+    {
+        switch (hab)
+        {
+            default:
+                return "Pozo ígneo";
+            case 1:
+                return "Piromancia dracónica";
+            case 2:
+                return "Luciérnaga danzante";
+            case 3:
+                return "Sol en miniatura";
+            case 4:
+                return "Vuelo del dragon";
+
+        }
+    }
+
+
+    public override string GetHabDescription(int hab)
+    {
+        switch (hab)
+        {
+            default:
+                return "Adrik utiliza sus reservas mágicas para atacar, perdiendo sinergia elemental  cuando usa sus habilidades. " +
+                       "Las llamas que conjura arden con fuerza, Adrik puede usar su ataque básico en sí mismo para absorber las llamas y llenar su pozo, " +
+                       "con el pozo al máximo su sinergia total es de " + (stats.sinergy * pMaxMultiplier).ToString("F0") + ", al mínimo es de " + (stats.sinergy * pMinMultiplier).ToString("F0") + ". " +
+                       "El pozo tiene un valor total de " + pMAmount + ".";
+
+            case 1:
+                return "Lanza una bola de fuego que explota y causa " + CalculateSinergy(h1Dmg).ToString("F0") + " de daño mágico";
+
+            case 2:
+                return "Lanza una llama danzante al aire que avanza lanzando chispas ígneas al aire que explotan haciendo " + CalculateSinergy(h2Dmg).ToString("F0") + " de daño mágico";
+
+            case 3:
+                return "Crea un sol en miniatura que emana calor ardiente. " +
+                       "Al invocarlo y cada vez que empieza el turno de Adrik causa " + CalculateSinergy(h3Dmg).ToString("F0") + " de daño mágico a sus alrededores,  " +
+                       "el modificador de Pozo ígneo se aplica al invocarse y no cambia nunca. " +
+                       "Al rellenar el pozo también absorbe el sol.";
+            case 4:
+                return "Vuela a una dirección próxima recuperando " + h4Flames + " de llamas del pozo.\r\n";
+
         }
     }
 }

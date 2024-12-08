@@ -8,16 +8,18 @@ public class Buff : MonoBehaviour
     public PjBase user;
     [HideInInspector]
     public PjBase target;
-    public float duration;
+    public int duration;
     [HideInInspector]
     public bool untimed;
-    public Stats statsToChange;
+    public Stats statsToChange = new Stats();
     float spdThreshold = 15;
     public GameObject particleFx;
     float regen;
+    public bool debuff;
 
-    public virtual void NormalSetUp(PjBase user, PjBase target, Stats statsToChange,float duration, GameObject particleFx)
+    public virtual void NormalSetUp(PjBase user, PjBase target, StatsToBuff statsToChange, int duration, GameObject particleFx, bool isDebuff)
     {
+        debuff = isDebuff;
         this.user = user;
         this.target = target;
         this.duration = duration;
@@ -25,59 +27,66 @@ public class Buff : MonoBehaviour
         {
             untimed = true;
         }
-        this.statsToChange = statsToChange;
 
-        target.stats.strength += this.statsToChange.strength;
-        target.stats.sinergy += this.statsToChange.sinergy;
-        target.stats.control += this.statsToChange.control;
-        target.stats.fDef += this.statsToChange.fDef;
-        target.stats.mDef += this.statsToChange.mDef;
 
-        if (this.statsToChange.spd > 0)
+        this.statsToChange.pot = user.CalculateControl(statsToChange.pot);
+        this.statsToChange.res = user.CalculateControl(statsToChange.res);
+        this.statsToChange.spd = user.CalculateControl(statsToChange.spd);
+
+        if (isDebuff)
         {
-            if (this.statsToChange.spd <= user.stats.control / spdThreshold)
-            {
-                target.stats.spd += this.statsToChange.spd;
-            }
-            else
-            {
-                this.statsToChange.spd = user.stats.control / spdThreshold;
-                target.stats.spd += this.statsToChange.spd;
-            }
+            this.statsToChange.pot = -this.statsToChange.pot;
+            this.statsToChange.res = -this.statsToChange.res;
+            this.statsToChange.spd = -this.statsToChange.spd;
+            this.statsToChange.movement = -this.statsToChange.movement;
         }
-        else if (this.statsToChange.spd < 0)
-        {
-            if (this.statsToChange.spd <= user.stats.control / -spdThreshold)
-            {
-                target.stats.spd += this.statsToChange.spd;
-            }
-            else
-            {
-                this.statsToChange.spd = user.stats.control / -spdThreshold;
-                target.stats.spd += this.statsToChange.spd;
-            }
-        }
+
+
+        target.stats.strength += this.statsToChange.pot;
+        target.stats.sinergy += this.statsToChange.pot;
+        target.stats.fRes += this.statsToChange.res;
+        target.stats.mRes += this.statsToChange.res;
+        target.stats.spd += this.statsToChange.spd;
+        target.stats.movement += this.statsToChange.movement;
+
 
         if (particleFx)
         {
             this.particleFx = Instantiate(particleFx, target.transform);
         }
 
+        target.UpdateUI();
     }
 
-    public virtual void Die()
+    public void Tick()
     {
+        if (!untimed)
+        {
+        duration--;
+            if(duration <= 0)
+            {
+               StartCoroutine(Die());
+            }
+        }
+    }
+
+    public virtual IEnumerator Die()
+    {
+        yield return null;
         if (particleFx)
         {
             Destroy(particleFx);
         }
 
-        target.stats.strength -= statsToChange.strength;
-        target.stats.sinergy -= statsToChange.sinergy;
-        target.stats.control -= statsToChange.control;
+        target.stats.strength -= statsToChange.pot;
+        target.stats.sinergy -= statsToChange.pot;
         target.stats.spd -= statsToChange.spd;
-        target.stats.fDef -= statsToChange.fDef;
-        target.stats.mDef -= statsToChange.mDef;
+        target.stats.fRes -= statsToChange.res;
+        target.stats.mRes -= statsToChange.res;
+
+        target.UpdateUI();
+
+        user.buffList.Remove(this);
         Destroy(this);
     }
 }

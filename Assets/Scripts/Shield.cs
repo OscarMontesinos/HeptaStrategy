@@ -6,7 +6,7 @@ public class Shield : Buff
 {
     public float shieldAmount;
 
-    public void ShieldSetUp(PjBase user,PjBase target, float shieldAmount, float duration, GameObject particleFx)
+    public void ShieldSetUp(PjBase user,PjBase target, float shieldAmount, int duration, GameObject particleFx)
     {
         this.user = user;
         this.target = target;
@@ -52,16 +52,9 @@ public class Shield : Buff
         return -value;
     }
 
-    public override void Die()
+    public override IEnumerator Die()
     {
-        if (particleFx)
-        {
-            Destroy(particleFx);
-        }
-
-        ChangeShieldAmount(-shieldAmount);
-
-
-        Destroy(this);
+        SetShieldAmount(0);
+        return base.Die();
     }
 }
