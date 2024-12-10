@@ -206,14 +206,14 @@ public class Adrik : PjBase
 
     public override void ManageHabCDsUI()
     {
-        UIManager.Instance.habIndicator1.UpdateHab(HabIndicator.CdType.maxR, h1CurrentTimes);
+        UIManager.Instance.habIndicator1.UpdateHab(HabIndicator.CdType.maxR, h1CurrentTimes, false);
 
-        UIManager.Instance.habIndicator2.UpdateHab(HabIndicator.CdType.cd, h2CurrentCd);
+        UIManager.Instance.habIndicator2.UpdateHab(HabIndicator.CdType.cd, h2CurrentCd, false);
 
-        if (h3ActualSun) UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.unactive, 0);
-        else UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.none, 0);
+        if (h3ActualSun) UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.unactive, 0, true);
+        else UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.none, 0, false);
 
-        UIManager.Instance.habIndicator4.UpdateHab(HabIndicator.CdType.cd, h4CurrentCd);
+        UIManager.Instance.habIndicator4.UpdateHab(HabIndicator.CdType.cd, h4CurrentCd, false);
     }
 
     public override void ManageHabInputs()

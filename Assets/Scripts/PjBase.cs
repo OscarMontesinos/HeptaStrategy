@@ -15,7 +15,9 @@ public class PjBase : MonoBehaviour
 {
     public int team;
     public Stats stats;
+    [HideInInspector]
     public List<Buff> buffList = new List<Buff>();
+    [HideInInspector]
     public List<Invocation> invocationList = new List<Invocation>();
     [HideInInspector]
     public bool isStuned;
@@ -50,6 +52,21 @@ public class PjBase : MonoBehaviour
     public enum HabTargetType
     {
         none, ally, enemy, both
+    }
+
+    [ContextMenu("CreateReferences")]
+    public void CreateReferences()
+    {
+        turnIndicator = transform.GetChild(0).GetChild(2).gameObject;
+        hSelectedIndicator = transform.GetChild(0).GetChild(4).gameObject;
+        stunIndicator = transform.GetChild(0).GetChild(0).gameObject;
+        justStunIndicator = transform.GetChild(0).GetChild(1).gameObject;
+        hpBar = transform.GetChild(0).GetChild(3).GetComponent<Slider>();
+        shieldBar = transform.GetChild(0).GetChild(5).GetComponent<Slider>();
+        hpText = transform.GetChild(0).GetChild(6).GetComponent<TextMeshProUGUI>();
+        singleIndicator = transform.GetChild(1).GetChild(0).gameObject;
+        areaIndicator = transform.GetChild(1).GetChild(1).gameObject;
+        extensionIndicator = transform.GetChild(1).GetChild(2).gameObject;
     }
 
     public virtual void Update()
@@ -93,7 +110,7 @@ public class PjBase : MonoBehaviour
 
     void CalculateStats()
     {
-        stats.mHp = stats.mHp * 7.5f;
+        stats.mHp = stats.mHp * 6f;
         stats.sinergy = stats.sinergy * 2.5f;
         stats.strength = stats.strength * 2.5f;
         stats.control = stats.control * 2.5f;
@@ -127,13 +144,13 @@ public class PjBase : MonoBehaviour
     }
     public virtual void ManageHabCDsUI()
     {
-        UIManager.Instance.habIndicator1.UpdateHab(HabIndicator.CdType.unactive, 0);
+        UIManager.Instance.habIndicator1.UpdateHab(HabIndicator.CdType.unactive, 0, false);
 
-        UIManager.Instance.habIndicator2.UpdateHab(HabIndicator.CdType.unactive, 0);
+        UIManager.Instance.habIndicator2.UpdateHab(HabIndicator.CdType.unactive, 0, false);
 
-        UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.unactive, 0);
+        UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.unactive, 0, false);
 
-        UIManager.Instance.habIndicator4.UpdateHab(HabIndicator.CdType.unactive, 0);
+        UIManager.Instance.habIndicator4.UpdateHab(HabIndicator.CdType.unactive, 0, false);
     }
     public virtual void ManageHabInputs()
     {
@@ -316,6 +333,7 @@ public class PjBase : MonoBehaviour
     public virtual void GetStunned()
     {
         isStuned = true;
+        UpdateUI();
     }
     public void HSelect(bool select)
     {

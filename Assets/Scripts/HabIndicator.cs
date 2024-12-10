@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,9 +16,10 @@ public class HabIndicator : MonoBehaviour
     public TextMeshProUGUI maxRText;
     public GameObject maxRIcon;
     public GameObject darkerIcon;
-
-    public void UpdateHab(CdType cdType, int cd)
+    public GameObject specialIcon;
+    public void UpdateHab(CdType cdType, int cd, bool activateSpecialIcon)
     {
+        specialIcon.SetActive(activateSpecialIcon);
         switch (cdType)
         {
             case CdType.none:

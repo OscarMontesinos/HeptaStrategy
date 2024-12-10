@@ -205,7 +205,7 @@ RectTransform:
   - {fileID: 302917554987720582}
   - {fileID: 3253402254048500889}
   m_Father: {fileID: 6364011798861056231}
-  m_RootOrder: 3
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -424,11 +424,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2870138513237988925, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3106645492383595013, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3604124602909771824, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_AnchorMax.x
@@ -440,11 +440,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3889809426305264364, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6913070719913199202, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484304, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_RootOrder
@@ -550,19 +550,20 @@ MonoBehaviour:
   stats:
     lvl: 5
     turn: 5
-    mHp: 30
+    mHp: 35
     hp: 30
     pot: 0
     shield: 0
     sinergy: 55
     strength: 5
     control: 15
-    fRes: 10
-    mRes: 30
+    fRes: 15
+    mRes: 40
     res: 0
     spd: 15
     movement: 4
   buffList: []
+  invocationList: []
   isStuned: 0
   wasJustStuned: 0
   turno: 0

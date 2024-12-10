@@ -119,6 +119,7 @@ public class Loana : PjBase
                                     if (h4Pasive)
                                     {
                                         h4Pasive = false;
+                                        h4Stun = false;
                                         DealDmg(target, DmgType.magical, CalculateSinergy(h2ExtraDmg));
                                     }
                                 }
@@ -192,20 +193,27 @@ public class Loana : PjBase
     }
     public override void ManageHabCDsUI()
     {
-        UIManager.Instance.habIndicator1.UpdateHab(HabIndicator.CdType.maxR, h1CurrentTimes);
-
-        UIManager.Instance.habIndicator2.UpdateHab(HabIndicator.CdType.cd, h2CurrentCd);
-
-        if (h3CurrentBubble)
+        if (h4Stun)
         {
-            UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.cd, h3CurrentBubble.duration);
+            UIManager.Instance.habIndicator1.UpdateHab(HabIndicator.CdType.maxR, h1CurrentTimes,true);
         }
         else
         {
-            UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.cd, h3CurrentCd);
+            UIManager.Instance.habIndicator1.UpdateHab(HabIndicator.CdType.maxR, h1CurrentTimes, false);
         }
 
-        UIManager.Instance.habIndicator4.UpdateHab(HabIndicator.CdType.cd, h4CurrentCd);
+        UIManager.Instance.habIndicator2.UpdateHab(HabIndicator.CdType.cd, h2CurrentCd, false);
+
+        if (h3CurrentBubble)
+        {
+            UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.cd, h3CurrentBubble.duration, true); 
+        }
+        else
+        {
+            UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.cd, h3CurrentCd, false);
+        }
+
+        UIManager.Instance.habIndicator4.UpdateHab(HabIndicator.CdType.cd, h4CurrentCd, false);
     }
     public override void ManageHabInputs()
     {
