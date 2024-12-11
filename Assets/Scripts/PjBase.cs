@@ -34,6 +34,7 @@ public class PjBase : MonoBehaviour
     public Slider hpBar;
     public Slider shieldBar;
     public TextMeshProUGUI hpText;
+    public SpriteRenderer teamIndicator;
     [HideInInspector]
     public bool hSelected;
 
@@ -67,6 +68,7 @@ public class PjBase : MonoBehaviour
         singleIndicator = transform.GetChild(1).GetChild(0).gameObject;
         areaIndicator = transform.GetChild(1).GetChild(1).gameObject;
         extensionIndicator = transform.GetChild(1).GetChild(2).gameObject;
+        teamIndicator = transform.GetChild(3).GetComponent<SpriteRenderer>();
     }
 
     public virtual void Update()
@@ -213,6 +215,7 @@ public class PjBase : MonoBehaviour
     {
         turno = true;
         ManageHabCDs();
+        GetHealed(this, stats.regen, true);
         turnIndicator.SetActive(true);
         stats.turn = 5;
         if (isStuned)
@@ -265,7 +268,7 @@ public class PjBase : MonoBehaviour
         return value * stats.control / 100;
     }
 
-    public void DealDmg(PjBase target, DmgType dmgType, float dmgAmount)
+    public virtual void DealDmg(PjBase target, DmgType dmgType, float dmgAmount)
     {
         target.TakeDmg(this, dmgType, dmgAmount);
     }
@@ -322,7 +325,19 @@ public class PjBase : MonoBehaviour
             UpdateUI();
         }
     }
+    public virtual void Heal(PjBase target, float amount)
+    {
+        target.GetHealed(this, amount, false);
+    }
 
+    public virtual void GetHealed(PjBase user, float amount ,bool isRegen)
+    {
+        stats.hp += amount;
+        if(stats.hp > stats.mHp)
+        {
+            stats.hp = stats.mHp;
+        }
+    }
     public virtual void Stun(PjBase user)
     {
         if (!user.wasJustStuned)
@@ -498,11 +513,11 @@ public class PjBase : MonoBehaviour
     {
         areaIndicator.SetActive(true);
         areaIndicator.transform.position = originPos;
-        areaIndicator.transform.localScale = new Vector3(area, area, area);
+        areaIndicator.transform.localScale = new Vector3(area * 2 + 1, area * 2 + 1, area * 2 + 1);
 
         GameManager.Instance.UnselectAll();
 
-        Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(originPos, new Vector2(area, area), 0, GameManager.Instance.unitLayer);
+        Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(originPos, new Vector2(area * 2 + 1, area * 2 + 1), 0, GameManager.Instance.unitLayer);
         PjBase pj;
 
         switch (habTargetType)

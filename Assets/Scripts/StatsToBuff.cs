@@ -10,4 +10,5 @@ public class StatsToBuff
     public float res;
     public float spd;
     public int movement;
+    public float regen;
 }

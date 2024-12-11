@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public GameState gameState;
     public LayerMask unitLayer;
+
+    public Color32 team0Color;
+    public Color32 team1Color;
     public enum GameState
     {
         none, planning, selectingTargets
@@ -72,9 +75,26 @@ public class GameManager : MonoBehaviour
     {
         pjList = new List<PjBase>(FindObjectsOfType<PjBase>());
 
+        SetTeamColors();
+
         CalculateTurnOrder();
 
         StartTurn();
+    }
+
+    void SetTeamColors()
+    {
+        foreach (PjBase pj in pjList)
+        {
+            if(pj.team == 0)
+            {
+                pj.teamIndicator.color = team0Color;
+            }
+            else
+            {
+                pj.teamIndicator.color = team1Color;
+            }
+        }
     }
 
     void CalculateTurnOrder()

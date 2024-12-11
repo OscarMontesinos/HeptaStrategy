@@ -27,6 +27,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9245283
+      objectReference: {fileID: 0}
+    - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_Color.g
+      value: 0.64125466
+      objectReference: {fileID: 0}
+    - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_Color.r
+      value: 0.501513
+      objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484304, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -100,6 +112,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2811900758746468927, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
   m_PrefabInstance: {fileID: 4487689534776536686}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &2206629118611953210 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2366919398833387604, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+  m_PrefabInstance: {fileID: 4487689534776536686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3009964785529873863 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1694183438789544873, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
@@ -133,6 +150,7 @@ MonoBehaviour:
     turn: 5
     mHp: 65
     hp: 0
+    regen: 0
     pot: 0
     shield: 0
     sinergy: 25
@@ -156,6 +174,7 @@ MonoBehaviour:
   hpBar: {fileID: 7655219748454153569}
   shieldBar: {fileID: 6065067859835644749}
   hpText: {fileID: 9115328730815950100}
+  teamIndicator: {fileID: 2206629118611953210}
   hSelected: 0
   singleIndicator: {fileID: 8353221101954409829}
   areaIndicator: {fileID: 459237404752043217}

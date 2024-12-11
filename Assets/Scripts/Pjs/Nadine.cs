@@ -47,7 +47,6 @@ public class Nadine : PjBase
         {
             if (Input.GetMouseButtonDown(0))
             {
-                bool activated = false;
                 switch (habSelected)
                 {
                     default:
@@ -59,23 +58,22 @@ public class Nadine : PjBase
                             {
                                 if (target.hSelected && target != this)
                                 {
-                                    activated = true;
                                     switch (pWeapon)
                                     {
                                         case Weapon.pistol:
-                                            DealDmg(target, DmgType.magical, CalculateStrength(h1Dmg));
+                                            DealDmg(target, DmgType.phisical, CalculateStrength(h1Dmg));
                                             h1CurrentTimes--;
                                             stats.turn -= h1TurnPistol;
                                                 break;
 
                                         case Weapon.rifle:
-                                            DealDmg(target, DmgType.magical, CalculateStrength(h3Dmg));
+                                            DealDmg(target, DmgType.phisical, CalculateStrength(h3Dmg));
                                             h1CurrentTimes--;
                                             stats.turn -= h1Turn;
                                             break;
 
                                         case Weapon.shotgun:
-                                            DealDmg(target, DmgType.magical, CalculateStrength(h4Dmg));
+                                            DealDmg(target, DmgType.phisical, CalculateStrength(h4Dmg));
                                             h1CurrentTimes--;
                                             stats.turn -= h1Turn;
                                             break;
@@ -83,7 +81,7 @@ public class Nadine : PjBase
                                     }
                                     if (h2Active)
                                     {
-                                        DealDmg(target, DmgType.magical, CalculateStrength(h2Dmg));
+                                        DealDmg(target, DmgType.phisical, CalculateStrength(h2Dmg));
                                         h2Active = false;
                                     }
                                 }
@@ -269,11 +267,11 @@ public class Nadine : PjBase
                 break;
 
             case 3:
-                HabSelectArea(HabTargetType.ally, 1, transform.position);
+                HabSelectArea(HabTargetType.ally, 0, transform.position);
                 break;
 
             case 4:
-                HabSelectArea(HabTargetType.ally, 1, transform.position);
+                HabSelectArea(HabTargetType.ally, 0, transform.position);
                 break;
         }
 

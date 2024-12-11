@@ -12,7 +12,6 @@ public class Buff : MonoBehaviour
     [HideInInspector]
     public bool untimed;
     public Stats statsToChange = new Stats();
-    float spdThreshold = 15;
     public GameObject particleFx;
     float regen;
     public bool debuff;
@@ -32,6 +31,7 @@ public class Buff : MonoBehaviour
         this.statsToChange.pot = user.CalculateControl(statsToChange.pot);
         this.statsToChange.res = user.CalculateControl(statsToChange.res);
         this.statsToChange.spd = user.CalculateControl(statsToChange.spd);
+        this.statsToChange.regen = user.CalculateControl(statsToChange.regen);
 
         if (isDebuff)
         {
@@ -39,6 +39,7 @@ public class Buff : MonoBehaviour
             this.statsToChange.res = -this.statsToChange.res;
             this.statsToChange.spd = -this.statsToChange.spd;
             this.statsToChange.movement = -this.statsToChange.movement;
+            this.statsToChange.regen = -this.statsToChange.regen;
         }
 
 
@@ -48,6 +49,7 @@ public class Buff : MonoBehaviour
         target.stats.mRes += this.statsToChange.res;
         target.stats.spd += this.statsToChange.spd;
         target.stats.movement += this.statsToChange.movement;
+        target.stats.regen += this.statsToChange.regen;
 
 
         if (particleFx)
@@ -83,10 +85,12 @@ public class Buff : MonoBehaviour
         target.stats.spd -= statsToChange.spd;
         target.stats.fRes -= statsToChange.res;
         target.stats.mRes -= statsToChange.res;
+        target.stats.movement -= statsToChange.movement;
+        target.stats.regen -= statsToChange.regen;
 
         target.UpdateUI();
 
-        user.buffList.Remove(this);
+        target.buffList.Remove(this);
         Destroy(this);
     }
 }

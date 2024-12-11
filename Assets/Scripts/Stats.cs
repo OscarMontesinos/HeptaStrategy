@@ -12,6 +12,8 @@ public class Stats
     [HideInInspector]
     public float hp;
     [HideInInspector]
+    public float regen;
+    [HideInInspector]
     public float pot;
     [HideInInspector]
     public float shield;

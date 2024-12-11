@@ -255,7 +255,7 @@ public class Loana : PjBase
                 break;
 
             case 4:
-                HabSelectArea(HabTargetType.ally, 1, transform.position);
+                HabSelectArea(HabTargetType.ally, 0, transform.position);
                 break;
         }
     }

@@ -61,18 +61,18 @@ public class Namir : PjBase
                                 if (target.hSelected && target != this)
                                 {
                                     activated = true;
-                                    DealDmg(target, DmgType.magical, CalculateStrength(h1Dmg));
+                                    DealDmg(target, DmgType.phisical, CalculateStrength(h1Dmg));
                                     if (h4Active)
                                     {
-                                        DealDmg(target, DmgType.magical, CalculateControl(h1ExtraDmg));
+                                        DealDmg(target, DmgType.phisical, CalculateControl(h1ExtraDmg));
                                     }
                                     if(pCharges > 1)
                                     {
                                         pCharges -= 2;
-                                        DealDmg(target, DmgType.magical, CalculateStrength(h1Dmg));
+                                        DealDmg(target, DmgType.phisical, CalculateStrength(h1Dmg));
                                         if (h4Active)
                                         {
-                                            DealDmg(target, DmgType.magical, CalculateControl(h1ExtraDmg));
+                                            DealDmg(target, DmgType.phisical, CalculateControl(h1ExtraDmg));
                                         }
                                     }
                                 }
@@ -97,10 +97,10 @@ public class Namir : PjBase
                                 if (target.hSelected && target != this)
                                 {
                                     activated = true;
-                                    DealDmg(target, DmgType.magical, CalculateStrength(h2Dmg));
+                                    DealDmg(target, DmgType.phisical, CalculateStrength(h2Dmg));
                                     if (h4Active)
                                     {
-                                        DealDmg(target, DmgType.magical, CalculateControl(h2ExtraDmg));
+                                        DealDmg(target, DmgType.phisical, CalculateControl(h2ExtraDmg));
                                     }
 
                                     Vector2 dir = target.transform.position - transform.position;
@@ -129,10 +129,10 @@ public class Namir : PjBase
                                 if (target.hSelected && target != this)
                                 {
                                     activated = true;
-                                    DealDmg(target, DmgType.magical, CalculateStrength(h3Dmg));
+                                    DealDmg(target, DmgType.phisical, CalculateStrength(h3Dmg));
                                     if (h4Active)
                                     {
-                                        DealDmg(target, DmgType.magical, CalculateControl(h3ExtraDmg));
+                                        DealDmg(target, DmgType.phisical, CalculateControl(h3ExtraDmg));
                                     }
 
                                     Vector2 dir = UtilsClass.GetMouseWorldPosition() - transform.position;
@@ -291,7 +291,7 @@ public class Namir : PjBase
                 }
                 else
                 {
-                    HabSelectArea(HabTargetType.ally, 1, transform.position);
+                    HabSelectArea(HabTargetType.ally, 0, transform.position);
                 }
                 break;
         }
