@@ -57,7 +57,16 @@ public class Loana : PjBase
         base.GetTurn();
         if (pRenew)
         {
-            pShield.SetShieldAmount(CalculateControl(pAmount));
+            if(pShield != null)
+            {
+                pShield.SetShieldAmount(CalculateControl(pAmount));
+            }
+            else
+            {
+                pShield = gameObject.AddComponent<Shield>();
+                pShield.ShieldSetUp(this, this, CalculateControl(pAmount), 0, null);
+                buffList.Add(pShield);
+            }
         }
     }
     public override void EndTurn()

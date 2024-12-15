@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+
+    public GameObject UIPj;
+    bool isActive = true;
     PjBase pj;
     public TextMeshProUGUI turnoTxt;
     public TextMeshProUGUI statsTxt;
@@ -31,6 +34,14 @@ public class UIManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            UIPj.SetActive(!isActive);
+            isActive = !isActive;
         }
     }
     public void SetPj(PjBase pj)

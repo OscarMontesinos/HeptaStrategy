@@ -174,6 +174,7 @@ MonoBehaviour:
   hpBar: {fileID: 7655219748454153569}
   shieldBar: {fileID: 6065067859835644749}
   hpText: {fileID: 9115328730815950100}
+  nameText: {fileID: 5796051908906568575}
   teamIndicator: {fileID: 2206629118611953210}
   hSelected: 0
   singleIndicator: {fileID: 8353221101954409829}
@@ -196,6 +197,7 @@ MonoBehaviour:
     res: 0
     spd: 0
     movement: 0
+    regen: 0
   h2Duration: 2
   h3Cd: 5
   h3Turn: 3
@@ -211,7 +213,19 @@ MonoBehaviour:
     res: 160
     spd: 0
     movement: 0
+    regen: 0
   h4Duration: 1
+--- !u!114 &5796051908906568575 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7937822330784195857, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+  m_PrefabInstance: {fileID: 4487689534776536686}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6065067859835644749 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7668516151738205475, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}

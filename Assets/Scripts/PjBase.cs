@@ -34,6 +34,7 @@ public class PjBase : MonoBehaviour
     public Slider hpBar;
     public Slider shieldBar;
     public TextMeshProUGUI hpText;
+    public TextMeshProUGUI nameText;
     public SpriteRenderer teamIndicator;
     [HideInInspector]
     public bool hSelected;
@@ -65,6 +66,7 @@ public class PjBase : MonoBehaviour
         hpBar = transform.GetChild(0).GetChild(3).GetComponent<Slider>();
         shieldBar = transform.GetChild(0).GetChild(5).GetComponent<Slider>();
         hpText = transform.GetChild(0).GetChild(6).GetComponent<TextMeshProUGUI>();
+        nameText = transform.GetChild(0).GetChild(7).GetChild(0).GetComponent<TextMeshProUGUI>();
         singleIndicator = transform.GetChild(1).GetChild(0).gameObject;
         areaIndicator = transform.GetChild(1).GetChild(1).gameObject;
         extensionIndicator = transform.GetChild(1).GetChild(2).gameObject;
@@ -89,6 +91,7 @@ public class PjBase : MonoBehaviour
         stats.hp = stats.mHp;
         hpBar.maxValue = stats.mHp;
         shieldBar.maxValue = stats.mHp;
+        nameText.text = name;
         UpdateUI();
     }
 

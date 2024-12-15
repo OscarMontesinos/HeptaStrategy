@@ -60,7 +60,7 @@ public class Buff : MonoBehaviour
         target.UpdateUI();
     }
 
-    public void Tick()
+    public virtual void Tick()
     {
         if (!untimed)
         {
@@ -71,6 +71,16 @@ public class Buff : MonoBehaviour
             }
         }
     }
+    public virtual void Reset()
+    {
+        target.stats.strength -= statsToChange.pot;
+        target.stats.sinergy -= statsToChange.pot;
+        target.stats.spd -= statsToChange.spd;
+        target.stats.fRes -= statsToChange.res;
+        target.stats.mRes -= statsToChange.res;
+        target.stats.movement -= statsToChange.movement;
+        target.stats.regen -= statsToChange.regen;
+    }
 
     public virtual IEnumerator Die()
     {
@@ -80,13 +90,7 @@ public class Buff : MonoBehaviour
             Destroy(particleFx);
         }
 
-        target.stats.strength -= statsToChange.pot;
-        target.stats.sinergy -= statsToChange.pot;
-        target.stats.spd -= statsToChange.spd;
-        target.stats.fRes -= statsToChange.res;
-        target.stats.mRes -= statsToChange.res;
-        target.stats.movement -= statsToChange.movement;
-        target.stats.regen -= statsToChange.regen;
+        Reset();
 
         target.UpdateUI();
 
