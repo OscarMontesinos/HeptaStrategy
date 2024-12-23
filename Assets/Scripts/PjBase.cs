@@ -95,7 +95,7 @@ public class PjBase : MonoBehaviour
         UpdateUI();
     }
 
-    public void UpdateUI()
+    public virtual void UpdateUI()
     {
         hpBar.value = stats.hp;
         shieldBar.value = stats.shield;
@@ -216,6 +216,7 @@ public class PjBase : MonoBehaviour
 
     public virtual void GetTurn()
     {
+        CameraManager.Instance.transform.position = transform.position;
         turno = true;
         ManageHabCDs();
         GetHealed(this, stats.regen, true);
@@ -282,11 +283,11 @@ public class PjBase : MonoBehaviour
 
         if (dmgType == DmgType.magical)
         {
-            calculo = stats.mRes;
+            calculo = stats.mRes + stats.res;
         }
         else
         {
-            calculo = stats.fRes;
+            calculo = stats.fRes + stats.res;
         }
 
         if (calculo < 0)
@@ -339,6 +340,11 @@ public class PjBase : MonoBehaviour
         if(stats.hp > stats.mHp)
         {
             stats.hp = stats.mHp;
+        }
+
+        if (hpBar != null)
+        {
+            UpdateUI();
         }
     }
     public virtual void Stun(PjBase user)

@@ -1,10 +1,12 @@
 using CodeMonkey.Utils;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Namir : PjBase
 {
+    public TextMeshProUGUI pText;
     int pCharges;
     public int h1MaxRTimes;
     int h1CurrentTimes;
@@ -214,7 +216,7 @@ public class Namir : PjBase
 
         }
     }
-
+    
     public override void ManageHabCDs()
     {
         h1CurrentTimes = h1MaxRTimes;
@@ -335,5 +337,11 @@ public class Namir : PjBase
                        "Si ya está en el estado sangre dorada lanza cintas de luz en forma de serpiente a un enemigo aturdiéndolo, saliendo del estado. " +
                        "Si Namir no está en el estado de sangre dorada obtiene un bono de " + h4ExtraMovement + " de movimiento.";
         }
+    }
+
+    public override void UpdateUI()
+    {
+        pText.text = pCharges.ToString();
+        base.UpdateUI();
     }
 }

@@ -50,6 +50,9 @@ TagManager:
   - name: Pj
     uniqueID: 2160934141
     locked: 0
+  - name: Fx
+    uniqueID: 127558389
+    locked: 0
   - name: UiPj
     uniqueID: 893918409
     locked: 0

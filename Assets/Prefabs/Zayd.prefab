@@ -190,6 +190,7 @@ MonoBehaviour:
     spd: 30
     movement: 0
     regen: 0
+  pFx: {fileID: 5632305965621731266, guid: e7ce0624598cb064983a7e76c4a3a18e, type: 3}
   pDmg: 15
   pDmgMultiplier: 2
   pDuration: 2

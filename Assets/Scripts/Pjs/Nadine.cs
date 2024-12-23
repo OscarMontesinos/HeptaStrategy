@@ -104,7 +104,7 @@ public class Nadine : PjBase
                         break;
 
                     case 3:
-                        if (pWeapon == Weapon.pistol)
+                        if (pWeapon != Weapon.rifle)
                         {
                             pWeapon = Weapon.rifle;
                             h1CurrentTimes = h1MaxRTimes;
@@ -122,7 +122,7 @@ public class Nadine : PjBase
                         DisableIndicators();
                         break;
                     case 4:
-                        if (pWeapon == Weapon.pistol)
+                        if (pWeapon != Weapon.shotgun)
                         {
                             pWeapon = Weapon.shotgun;
                             h1CurrentTimes = h1MaxRTimes;

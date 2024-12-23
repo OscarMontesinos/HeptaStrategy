@@ -15,6 +15,7 @@ public class SolarLight : Buff
             regen = user.CalculateControl(statsToChange.regen);
             statsToChange.regen = 0;
             user.stats.regen += regen;
+            user.GetHealed(user, regen, true);
             debuff = true;
             duration++;
         }

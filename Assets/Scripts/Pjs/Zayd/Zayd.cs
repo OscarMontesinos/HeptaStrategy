@@ -9,6 +9,7 @@ using static PjBase;
 public class Zayd : PjBase
 {
     public StatsToBuff pStatsToChange;
+    public GameObject pFx;
     public float pDmg;
     public float pDmgMultiplier;
     public int pDuration;
@@ -179,7 +180,7 @@ public class Zayd : PjBase
         if (!target.GetComponent<Deterioration>())
         {
             Buff buff = target.gameObject.AddComponent<Deterioration>();
-            buff.NormalSetUp(this, target, pStatsToChange, pDuration, null, true);
+            buff.NormalSetUp(this, target, pStatsToChange, pDuration, pFx, true);
             target.buffList.Add(buff);
         }
         else

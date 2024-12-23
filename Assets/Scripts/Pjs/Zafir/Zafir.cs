@@ -11,6 +11,7 @@ public class Zafir : PjBase
         spear, shield, gloves
     }
     Weapon pWeapon;
+    public GameObject pFx;
     public int pDuration;
     [HideInInspector]
     public List<PjBase> pList = new List<PjBase>();
@@ -129,8 +130,7 @@ public class Zafir : PjBase
 
                         if (activated)
                         {
-                            stats.fRes -= h3ActualResBuff;
-                            stats.mRes -= h3ActualResBuff;
+                            stats.res -= h3ActualResBuff;
                             h3ActualResBuff = 0;
                             pWeapon = Weapon.spear;
                             h2CurrentCd = h2Cd + 1;
@@ -184,8 +184,7 @@ public class Zafir : PjBase
                             }
                             pWeapon = Weapon.shield;
                             h3ActualResBuff = CalculateControl(h3ResBuff);
-                            stats.fRes += h3ActualResBuff;
-                            stats.mRes += h3ActualResBuff;
+                            stats.res += h3ActualResBuff;
                             h3CurrentCd = h3Cd + 1;
                             stats.turn -= h3Turn;
                             if (extraActivated)
@@ -223,8 +222,7 @@ public class Zafir : PjBase
 
                         if (activated)
                         {
-                            stats.fRes -= h3ActualResBuff;
-                            stats.mRes -= h3ActualResBuff;
+                            stats.res -= h3ActualResBuff;
                             h3ActualResBuff = 0;
                             pWeapon = Weapon.gloves;
                             h4CurrentCd = h4Cd + 1;
@@ -415,7 +413,7 @@ public class Zafir : PjBase
             if (!pList.Contains(target))
             {
                 SolarLight buff = target.gameObject.AddComponent<SolarLight>();
-                buff.NormalSetUp(this, target, stats, pDuration, null, false);
+                buff.NormalSetUp(this, target, stats, pDuration, pFx, false);
                 target.buffList.Add(buff);
             }
             else

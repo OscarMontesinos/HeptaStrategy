@@ -184,6 +184,7 @@ MonoBehaviour:
   singleIndicator: {fileID: 8353221101954409829}
   areaIndicator: {fileID: 459237404752043217}
   extensionIndicator: {fileID: 4487689533072906007}
+  pFx: {fileID: 8337509113384579834, guid: afdc042b688536f4eabcb1fcad22e2d5, type: 3}
   pDuration: 2
   pList: []
   pStatsToChange:
@@ -191,7 +192,7 @@ MonoBehaviour:
     res: 60
     spd: 0
     movement: 0
-    regen: 30
+    regen: 25
   h1MaxRTimesSpear: 2
   h1MaxRTimesShield: 2
   h1MaxRTimesGloves: 3

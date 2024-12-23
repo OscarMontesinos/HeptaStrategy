@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    public static CameraManager Instance;
     [Range(10,50)]
     public float speed;
 
@@ -17,6 +18,16 @@ public class CameraManager : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
+
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Buff : MonoBehaviour
@@ -32,6 +33,10 @@ public class Buff : MonoBehaviour
         this.statsToChange.res = user.CalculateControl(statsToChange.res);
         this.statsToChange.spd = user.CalculateControl(statsToChange.spd);
         this.statsToChange.regen = user.CalculateControl(statsToChange.regen);
+        if (target.turno)
+        {
+            target.GetHealed(target, this.statsToChange.regen, true);
+        }
 
         if (isDebuff)
         {
@@ -42,11 +47,8 @@ public class Buff : MonoBehaviour
             this.statsToChange.regen = -this.statsToChange.regen;
         }
 
-
-        target.stats.strength += this.statsToChange.pot;
-        target.stats.sinergy += this.statsToChange.pot;
-        target.stats.fRes += this.statsToChange.res;
-        target.stats.mRes += this.statsToChange.res;
+        target.stats.pot += this.statsToChange.pot;
+        target.stats.res += this.statsToChange.res;
         target.stats.spd += this.statsToChange.spd;
         target.stats.movement += this.statsToChange.movement;
         target.stats.regen += this.statsToChange.regen;
@@ -73,6 +75,8 @@ public class Buff : MonoBehaviour
     }
     public virtual void Reset()
     {
+        target.stats.pot -= statsToChange.pot;
+        target.stats.res -= statsToChange.res;
         target.stats.strength -= statsToChange.pot;
         target.stats.sinergy -= statsToChange.pot;
         target.stats.spd -= statsToChange.spd;

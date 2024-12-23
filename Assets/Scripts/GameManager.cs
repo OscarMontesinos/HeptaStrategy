@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         int i2 = 0;
         while(i1 < pjList.Count-1)
         {
-            while(i2 < pjList.Count-2)
+            while(i2 < pjList.Count-1)
             {
                 if (pjList[i2 + 1].stats.spd > pjList[i2].stats.spd)
                 {

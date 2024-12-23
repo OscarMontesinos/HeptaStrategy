@@ -35,36 +35,40 @@ public class Deterioration : Buff
             this.statsToChange.regen = -this.statsToChange.regen;
         }
 
-        lvl++;
-
-        if (lvl >= 1)
-        {
-            target.stats.strength += this.statsToChange.pot;
-            target.stats.sinergy += this.statsToChange.pot;
-        }
-        if (lvl >= 2)
-        {
-            dot = user.CalculateControl(zayd.pDmg);
-        }
-        if (lvl >= 3)
-        {
-            target.stats.spd += this.statsToChange.spd;
-        }
-        if (lvl >= 4)
-        {
-            target.stats.fRes += this.statsToChange.res;
-            target.stats.mRes += this.statsToChange.res;
-        }
-        if (lvl >= 5)
-        {
-            dot *= zayd.pDmgMultiplier;
-        }
-
 
         if (particleFx)
         {
             this.particleFx = Instantiate(particleFx, target.transform);
         }
+
+        lvl++;
+
+        if (lvl >= 1)
+        {
+            this.particleFx.transform.GetChild(0).gameObject.SetActive(true);
+            target.stats.pot += this.statsToChange.pot;
+        }
+        if (lvl >= 2)
+        {
+            this.particleFx.transform.GetChild(1).gameObject.SetActive(true);
+            dot = user.CalculateControl(zayd.pDmg);
+        }
+        if (lvl >= 3)
+        {
+            this.particleFx.transform.GetChild(2).gameObject.SetActive(true);
+            target.stats.spd += this.statsToChange.spd;
+        }
+        if (lvl >= 4)
+        {
+            this.particleFx.transform.GetChild(3).gameObject.SetActive(true);
+            target.stats.res += this.statsToChange.res;
+        }
+        if (lvl >= 5)
+        {
+            this.particleFx.transform.GetChild(4).gameObject.SetActive(true);
+            dot *= zayd.pDmgMultiplier;
+        }
+
 
         target.UpdateUI();
     }
@@ -79,8 +83,7 @@ public class Deterioration : Buff
     {
         if (lvl >= 1)
         {
-            target.stats.strength -= statsToChange.pot;
-            target.stats.sinergy -= statsToChange.pot;
+            target.stats.pot -= statsToChange.pot;
         }
         if(lvl >= 3)
         {
@@ -88,8 +91,7 @@ public class Deterioration : Buff
         }
         if (lvl >= 4)
         {
-            target.stats.fRes -= statsToChange.res;
-            target.stats.mRes -= statsToChange.res;
+            target.stats.res -= statsToChange.res;
         }
     }
 }
