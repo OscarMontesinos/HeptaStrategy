@@ -1,6 +1,7 @@
 using CodeMonkey.Utils;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Diagnostics;
 
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour
     {
         int i1 = 0;
         int i2 = 0;
-        while(i1 < pjList.Count-1)
+        while(i1 <= pjList.Count-1)
         {
             while(i2 < pjList.Count-1)
             {
@@ -118,16 +119,41 @@ public class GameManager : MonoBehaviour
             i2 = 0;
         i1++;
         }
+
+        foreach (PjBase pj in pjList)
+        {
+            if (!pj.skipTurn)
+            {
+                pj.hasTurn = true;
+            }
+        }
     }
 
     public void NextTurn()
     {
         pjList[actualTurn].EndTurn();
-        actualTurn++;
+
+        while (!pjList[actualTurn].hasTurn || pjList[actualTurn].skipTurn)
+        {
+            actualTurn++;
+
+            if (actualTurn >= pjList.Count)
+            {
+                break;
+            }
+        }
 
         if(actualTurn >= pjList.Count)
         {
             actualTurn = 0;
+
+            foreach(PjBase pj in pjList)
+            {
+                if (!pj.skipTurn)
+                {
+                    pj.hasTurn = true;
+                }
+            }
         }
 
         StartTurn();
@@ -151,11 +177,14 @@ public class GameManager : MonoBehaviour
     }
     public void Kill(PjBase target)
     {
-        if (pjList.IndexOf(target) < actualTurn)
+        if (!target.skipTurn)
         {
-            actualTurn--;
+            if (pjList.IndexOf(target) <= actualTurn)
+            {
+                actualTurn--;
+            }
+            pjList.Remove(target);
         }
-        pjList.Remove(target);
         Destroy(target.gameObject);
     }
 }

@@ -25,5 +25,5 @@ public class Stats
     [HideInInspector]
     public float res;
     public float spd;
-    public int movement;
+    public int movement = 4;
 }

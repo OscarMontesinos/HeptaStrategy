@@ -91,7 +91,8 @@ public class UIManager : MonoBehaviour
                             pj.CalculateControl(100).ToString("F0") + "\n" +
                             (pj.stats.fRes + pj.stats.res).ToString("F0") + "\n" +
                             (pj.stats.mRes + pj.stats.res).ToString("F0") + "\n" +
-                            pj.stats.spd.ToString("F0");
+                            pj.stats.spd.ToString("F0") + "\n" +
+                            pj.stats.movement.ToString("F0");
 
             if(pj.stats.pot > 0)
             {

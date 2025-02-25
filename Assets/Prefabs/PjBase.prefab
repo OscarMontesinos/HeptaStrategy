@@ -650,7 +650,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.000029802322}
-  m_SizeDelta: {x: 139.37, y: 32.33}
+  m_SizeDelta: {x: 100.34, y: 26.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2505374226787339688
 CanvasRenderer:
@@ -707,11 +707,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
+  m_fontSize: 23.85
   m_fontSizeBase: 25
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 5
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -2076,6 +2076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcda7ca1a9534a64080bbd5dafd26f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skipTurn: 0
   team: 1
   stats:
     lvl: 5
@@ -2098,6 +2099,7 @@ MonoBehaviour:
   isStuned: 0
   wasJustStuned: 0
   turno: 0
+  hasTurn: 0
   habSelected: 0
   turnIndicator: {fileID: 5026279848045875247}
   hSelectedIndicator: {fileID: 7614856808094982262}

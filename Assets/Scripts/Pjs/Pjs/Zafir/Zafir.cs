@@ -122,7 +122,7 @@ public class Zafir : PjBase
                                     }
                                     else
                                     {
-                                        DealDmg(target, DmgType.magical, CalculateSinergy(h2Dmg));
+                                        DealDmg(target, DmgType.magical, CalculateStrength(h2Dmg));
                                     }
                                 }
                             }
@@ -132,6 +132,10 @@ public class Zafir : PjBase
                         {
                             stats.res -= h3ActualResBuff;
                             h3ActualResBuff = 0;
+                            if (pWeapon == Weapon.gloves)
+                            {
+                                h1CurrentTimes--;
+                            }
                             pWeapon = Weapon.spear;
                             h2CurrentCd = h2Cd + 1;
                             stats.turn -= h2Turn;
@@ -161,7 +165,7 @@ public class Zafir : PjBase
                                     else
                                     {
                                         Stun(target);
-                                        DealDmg(target, DmgType.magical, CalculateSinergy(h3Dmg));
+                                        DealDmg(target, DmgType.magical, CalculateStrength(h3Dmg));
                                         extraActivated = true;
 
                                         Vector2 dir = target.transform.position - transform.position;
@@ -181,6 +185,10 @@ public class Zafir : PjBase
                             else
                             {
                                 h3Active = false;
+                            }
+                            if(pWeapon == Weapon.gloves)
+                            {
+                                h1CurrentTimes--;
                             }
                             pWeapon = Weapon.shield;
                             h3ActualResBuff = CalculateControl(h3ResBuff);
@@ -213,7 +221,7 @@ public class Zafir : PjBase
                                     }
                                     else
                                     {
-                                        DealDmg(target, DmgType.magical, CalculateSinergy(h4Dmg));
+                                        DealDmg(target, DmgType.magical, CalculateStrength(h4Dmg));
                                     }
                                 }
                             }
@@ -225,6 +233,7 @@ public class Zafir : PjBase
                             stats.res -= h3ActualResBuff;
                             h3ActualResBuff = 0;
                             pWeapon = Weapon.gloves;
+                            h1CurrentTimes++;
                             h4CurrentCd = h4Cd + 1;
                             stats.turn -= h4Turn;
                         }
@@ -466,13 +475,13 @@ public class Zafir : PjBase
                        "Otorga un bonus de " + CalculateControl(h3ResBuff).ToString("F0") + " a las resistencias \n\n" +
                        "Guanteletes : \nTurno: " + h1TurnGloves + " Rango: " + h1RangeGloves + " Daño " + CalculateStrength(h1DmgGloves).ToString("F0") + "\n\n";
             case 2:
-                return "Invoca lanzas luminosas en cono que hacen " + CalculateSinergy(h2Dmg).ToString("F0") + " de daño mágico";
+                return "Invoca lanzas luminosas en cono que hacen " + CalculateStrength(h2Dmg).ToString("F0") + " de daño mágico";
             case 3:
                 return "Lanza un pulso mágico que otorga un escudo de "+ CalculateControl(h3ShieldAmount).ToString("F0") +" a los aliados alrededor, " +
-                       "puede reactivar la habilidad para abalanzarse a un enemigo y lo aturdirlo, causando " + CalculateSinergy(h3Dmg).ToString("F0") + " de daño mágico";
+                       "puede reactivar la habilidad para abalanzarse a un enemigo y lo aturdirlo, causando " + CalculateStrength(h3Dmg).ToString("F0") + " de daño mágico";
             case 4:
                 return "Activa todas las marcas solares haciéndolas explotar en un pulso que cura " + CalculateControl(h4Heal).ToString("F0") + " a los aliados " +
-                       "o daña "+ CalculateSinergy(h4Dmg).ToString("F0") +" a los enemigos";
+                       "o daña "+ CalculateStrength(h4Dmg).ToString("F0") +" a los enemigos";
         }
     }
 }

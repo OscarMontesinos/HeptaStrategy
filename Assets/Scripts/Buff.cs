@@ -31,8 +31,11 @@ public class Buff : MonoBehaviour
 
         this.statsToChange.pot = user.CalculateControl(statsToChange.pot);
         this.statsToChange.res = user.CalculateControl(statsToChange.res);
+        this.statsToChange.mRes = user.CalculateControl(statsToChange.mRes);
+        this.statsToChange.fRes = user.CalculateControl(statsToChange.fRes);
         this.statsToChange.spd = user.CalculateControl(statsToChange.spd);
         this.statsToChange.regen = user.CalculateControl(statsToChange.regen);
+        this.statsToChange.movement = statsToChange.movement;
         if (target.turno)
         {
             target.GetHealed(target, this.statsToChange.regen, true);
@@ -42,13 +45,16 @@ public class Buff : MonoBehaviour
         {
             this.statsToChange.pot = -this.statsToChange.pot;
             this.statsToChange.res = -this.statsToChange.res;
+            this.statsToChange.mRes = -this.statsToChange.mRes;
+            this.statsToChange.fRes = -this.statsToChange.fRes;
             this.statsToChange.spd = -this.statsToChange.spd;
             this.statsToChange.movement = -this.statsToChange.movement;
             this.statsToChange.regen = -this.statsToChange.regen;
         }
-
         target.stats.pot += this.statsToChange.pot;
         target.stats.res += this.statsToChange.res;
+        target.stats.mRes += this.statsToChange.mRes;
+        target.stats.fRes += this.statsToChange.fRes;
         target.stats.spd += this.statsToChange.spd;
         target.stats.movement += this.statsToChange.movement;
         target.stats.regen += this.statsToChange.regen;
@@ -81,7 +87,9 @@ public class Buff : MonoBehaviour
         target.stats.sinergy -= statsToChange.pot;
         target.stats.spd -= statsToChange.spd;
         target.stats.fRes -= statsToChange.res;
+        target.stats.fRes -= statsToChange.fRes;
         target.stats.mRes -= statsToChange.res;
+        target.stats.mRes -= statsToChange.mRes;
         target.stats.movement -= statsToChange.movement;
         target.stats.regen -= statsToChange.regen;
     }

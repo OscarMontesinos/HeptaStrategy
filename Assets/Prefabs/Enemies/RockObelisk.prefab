@@ -33,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.b
-      value: 0.15481488
+      value: 0.120149516
       objectReference: {fileID: 0}
     - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.g
-      value: 0.57379943
+      value: 0.2823996
       objectReference: {fileID: 0}
     - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.r
-      value: 0.6698113
+      value: 0.33962262
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484304, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_RootOrder
@@ -101,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484310, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Name
-      value: Zafir
+      value: RockObelisk
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6660742372777506698, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
@@ -136,7 +136,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8345205438217484310, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
   m_PrefabInstance: {fileID: 4487689534776536686}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4645858355335090241
+--- !u!114 &5644868948577916466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,31 +145,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 5591036399056557688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2be0417e81714054eb8e3fceb6d84562, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d90d8769f4fcc04bb4181a98aed2d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skipTurn: 0
   team: 0
   stats:
     lvl: 5
     turn: 5
-    mHp: 40
+    mHp: 45
     hp: 0
     regen: 0
     pot: 0
     shield: 0
-    sinergy: 30
-    strength: 30
-    control: 30
-    fRes: 10
-    mRes: 20
+    sinergy: 40
+    strength: 5
+    control: 5
+    fRes: 30
+    mRes: 25
     res: 0
-    spd: 20
-    movement: 0
+    spd: 10
+    movement: 4
   buffList: []
   invocationList: []
   isStuned: 0
   wasJustStuned: 0
   turno: 0
+  hasTurn: 0
   habSelected: 0
   turnIndicator: {fileID: 8901249484603620929}
   hSelectedIndicator: {fileID: 6334909021977349656}
@@ -184,45 +186,15 @@ MonoBehaviour:
   singleIndicator: {fileID: 8353221101954409829}
   areaIndicator: {fileID: 459237404752043217}
   extensionIndicator: {fileID: 4487689533072906007}
-  pFx: {fileID: 8337509113384579834, guid: afdc042b688536f4eabcb1fcad22e2d5, type: 3}
-  pDuration: 2
-  pList: []
-  pStatsToChange:
-    pot: 0
-    res: 60
-    spd: 0
-    movement: 0
-    regen: 25
-  h1MaxRTimesSpear: 2
-  h1MaxRTimesShield: 2
-  h1MaxRTimesGloves: 3
-  h1TurnSpear: 2
-  h1TurnShield: 2
-  h1TurnGloves: 1
-  h1RangeSpear: 2
-  h1RangeShield: 1
-  h1RangeGloves: 1
-  h1DmgSpear: 30
-  h1DmgShield: 20
-  h1DmgGloves: 30
+  h1MaxRTimes: 2
+  h1Turn: 2
+  h1Range: 6
+  h1Area: 3
+  h1Dmg: 40
   h2Cd: 1
-  h2Turn: 2
-  h2Range: 3
-  h2Wide: 3
+  h2Turn: 3
+  h2Area: 3
   h2Dmg: 60
-  h3Cd: 2
-  h3ExtraCd: 1
-  h3Turn: 2
-  h3ExtraTurn: 1
-  h3Area: 3
-  h3ShieldAmount: 60
-  h3Range: 4
-  h3Dmg: 35
-  h3ResBuff: 50
-  h4Cd: 1
-  h4Turn: 2
-  h4Dmg: 45
-  h4Heal: 45
 --- !u!114 &5796051908906568575 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7937822330784195857, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}

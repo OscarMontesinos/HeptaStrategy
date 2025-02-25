@@ -13,6 +13,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class PjBase : MonoBehaviour
 {
+    public bool skipTurn;
     public int team;
     public Stats stats;
     [HideInInspector]
@@ -25,6 +26,8 @@ public class PjBase : MonoBehaviour
     public bool wasJustStuned;
     [HideInInspector]
     public bool turno;
+    [HideInInspector]
+    public bool hasTurn;
     [HideInInspector]
     public int habSelected;
     public GameObject turnIndicator;
@@ -122,6 +125,10 @@ public class PjBase : MonoBehaviour
         stats.fRes = stats.fRes * 2.5f;
         stats.mRes = stats.mRes * 2.5f;
         stats.spd = stats.spd * 2.5f;
+        if(skipTurn)
+        {
+            stats.spd = -9999;
+        }
 
         float lvlMultiplier = (float)(stats.lvl + 5) / 40;
 
@@ -234,11 +241,6 @@ public class PjBase : MonoBehaviour
         }
         UpdateUI();
 
-        foreach (Buff buff in buffList)
-        {
-            buff.Tick();
-        }
-
         foreach (Invocation invocation in invocationList)
         {
             invocation.Tick();
@@ -249,6 +251,12 @@ public class PjBase : MonoBehaviour
 
     public virtual void EndTurn()
     {
+        foreach (Buff buff in buffList)
+        {
+            buff.Tick();
+        }
+
+        hasTurn = false;
         turno = false;
         turnIndicator.SetActive(false);
     }
@@ -405,6 +413,52 @@ public class PjBase : MonoBehaviour
                     targetPj.HSelect(true);
                     break;
             }
+        }
+
+    }
+    public void HabSelectSingle(HabTargetType habTargetType, int range, int area, Vector2 originPos)
+    {
+        singleIndicator.SetActive(true);
+        areaIndicator.SetActive(true);
+        singleIndicator.transform.localScale = new Vector3(range * 2 + 1, range * 2 + 1, range * 2 + 1);
+        areaIndicator.transform.position = UtilsClass.GetMouseWorldPosition();
+        areaIndicator.transform.localScale = new Vector3(area, area, area);
+
+        GameManager.Instance.UnselectAll();
+        PjBase targetPj = GameManager.Instance.selectedPj;
+
+
+        if (targetPj && CheckRange(originPos, targetPj.transform.position, range))
+        {
+            switch (habTargetType)
+            {
+                case HabTargetType.none:
+                    break;
+
+                case HabTargetType.enemy:
+                    if (targetPj.team != team)
+                    {
+                        targetPj.HSelect(true); 
+                        areaIndicator.SetActive(true);
+                    }
+                    break;
+
+                case HabTargetType.ally:
+                    if (targetPj.team == team)
+                    {
+                        targetPj.HSelect(true);
+                        areaIndicator.SetActive(true);
+                    }
+                    break;
+                case HabTargetType.both:
+                    targetPj.HSelect(true);
+                    areaIndicator.SetActive(true);
+                    break;
+            }
+        }
+        else
+        {
+            areaIndicator.SetActive(false);
         }
 
     }
