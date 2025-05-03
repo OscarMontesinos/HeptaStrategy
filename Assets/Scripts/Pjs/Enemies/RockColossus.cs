@@ -3,25 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SandStormObelisk : PjBase
+public class RockColossus : PjBase
 {
+    bool pActive = true;
     public int h1MaxRTimes;
     int h1CurrentTimes;
     public int h1Turn;
     public int h1Range;
-    public int h1Area;
-    public float h1Dmg;
+    public float h1Dmg1;
+    public float h1Dmg2;
     public int h2Cd;
     int h2CurrentCd;
     public int h2Turn;
-    public int h2Range;
-    public int h2Area;
-    public float h2Dmg;
-    PjBase linkedPj;
-    Buff currentBuff;
+    public int h2Duration;
+    public float h2Amount;
+    public int h3Cd;
+    int h3CurrentCd;
     public int h3Turn;
-    public int h3Range;
+    public int h3Area;
+    public float h3Dmg;
     public StatsToBuff h3StatsToChange;
+    public int h3Duration;
+    public int h4Cd;
+    int h4CurrentCd;
+    public int h4Turn;
+    public int h4Range;
+    public float h4Dmg;
 
     public override void Update()
     {
@@ -44,7 +51,14 @@ public class SandStormObelisk : PjBase
                                 if (target.hSelected && target != this)
                                 {
                                     activated = true;
-                                    DealDmg(target, DmgType.magical, CalculateSinergy(h1Dmg));
+                                    if (h1CurrentTimes > 1)
+                                    {
+                                        DealDmg(target, DmgType.phisical, CalculateStrength(h1Dmg1));
+                                    }
+                                    else
+                                    {
+                                        DealDmg(target, DmgType.phisical, CalculateStrength(h1Dmg2));
+                                    }
                                 }
                             }
                         }
@@ -59,27 +73,18 @@ public class SandStormObelisk : PjBase
                         DisableIndicators();
                         break;
                     case 2:
-                        foreach (PjBase target in GameManager.Instance.pjList)
-                        {
-                            if (target != null)
-                            {
-                                if (target.hSelected && target != this)
-                                {
-                                    activated = true;
-                                    DealDmg(target, DmgType.magical, CalculateSinergy(h2Dmg));
-                                }
-                            }
-                        }
 
-                        if (activated)
-                        {
-                            h2CurrentCd = h2Cd + 1;
-                            stats.turn -= h2Turn;
-                        }
+                        Shield shield = gameObject.AddComponent<Shield>();
+                        shield.ShieldSetUp(this, this, CalculateControl(h2Amount), h2Duration, null);
+                        buffList.Add(shield);
+
+                        h2CurrentCd = h2Cd + 1;
+                        stats.turn -= h2Turn;
 
                         habSelected = 0;
                         GameManager.Instance.UnselectAll();
                         DisableIndicators();
+
                         break;
                     case 3:
                         foreach (PjBase target in GameManager.Instance.pjList)
@@ -90,25 +95,43 @@ public class SandStormObelisk : PjBase
                                 {
                                     activated = true;
 
-                                    if (currentBuff)
-                                    {
-                                        currentBuff.StartCoroutine(Die());
-                                    }
+                                    Buff debuff = target.gameObject.AddComponent<Buff>();
+                                    debuff.NormalSetUp(this, target, h3StatsToChange, h3Duration, null, true);
+                                    target.buffList.Add(debuff);
 
-                                    Buff buff = target.gameObject.AddComponent<Buff>();
-                                    buff.NormalSetUp(this, target, h3StatsToChange, 0, null, false);
-                                    target.buffList.Add(buff);
-                                    linkedPj = target;
-                                    currentBuff = buff;
+                                    DealDmg(target, DmgType.phisical, CalculateStrength(h3Dmg));
                                 }
                             }
                         }
 
                         if (activated)
                         {
+                            h3CurrentCd = h3Cd + 1;
                             stats.turn -= h3Turn;
                         }
+                        habSelected = 0;
+                        GameManager.Instance.UnselectAll();
+                        DisableIndicators();
+                        break;
+                    case 4:
+                        foreach (PjBase target in GameManager.Instance.pjList)
+                        {
+                            if (target != null)
+                            {
+                                if (target.hSelected && target != this)
+                                {
+                                    activated = true;
+                                    DealDmg(target, DmgType.phisical, CalculateStrength(h4Dmg));
+                                    Stun(target);
+                                }
+                            }
+                        }
 
+                        if (activated)
+                        {
+                            h4CurrentCd = h4Cd + 1;
+                            stats.turn -= h4Turn;
+                        }
                         habSelected = 0;
                         GameManager.Instance.UnselectAll();
                         DisableIndicators();
@@ -124,18 +147,21 @@ public class SandStormObelisk : PjBase
 
             ManageHabIndicators();
 
-
         }
     }
 
-    public override void GetTurn()
+    public override void GetStunned()
     {
-        base.GetTurn();
-        if (!currentBuff)
+        if (pActive)
         {
-            linkedPj = null;
+            pActive = false;
+        }
+        else
+        {
+            base.GetStunned();
         }
     }
+
     public override void ManageHabCDs()
     {
         h1CurrentTimes = h1MaxRTimes;
@@ -144,14 +170,26 @@ public class SandStormObelisk : PjBase
         {
             h2CurrentCd--;
         }
+
+        if (h3CurrentCd > 0)
+        {
+            h3CurrentCd--;
+        }
+
+        if (h4CurrentCd > 0)
+        {
+            h4CurrentCd--;
+        }
     }
     public override void ManageHabCDsUI()
     {
-        UIManager.Instance.habIndicator1.UpdateHab(HabIndicator.CdType.maxR, h1CurrentTimes, false);
+        UIManager.Instance.habIndicator1.UpdateHab(HabIndicator.CdType.maxR, h1CurrentTimes, h1CurrentTimes < 1);
 
         UIManager.Instance.habIndicator2.UpdateHab(HabIndicator.CdType.cd, h2CurrentCd, false);
 
-        UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.none,0, linkedPj);
+        UIManager.Instance.habIndicator3.UpdateHab(HabIndicator.CdType.cd, h3CurrentCd, false);
+
+        UIManager.Instance.habIndicator4.UpdateHab(HabIndicator.CdType.cd, h4CurrentCd, false);
     }
 
     public override void ManageHabInputs()
@@ -164,9 +202,13 @@ public class SandStormObelisk : PjBase
         {
             SelectHab(2);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && stats.turn >= h3Turn)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && stats.turn >= h3Turn && h3CurrentCd <= 0)
         {
             SelectHab(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4) && stats.turn >= h4Turn && h4CurrentCd <= 0)
+        {
+            SelectHab(4);
         }
     }
     public override void ManageHabIndicators()
@@ -178,15 +220,19 @@ public class SandStormObelisk : PjBase
                 break;
 
             case 1:
-                HabSelectSingle(HabTargetType.enemy, h1Range, h1Area, transform.position);
+                HabSelectSingle(HabTargetType.enemy, h1Range, transform.position);
                 break;
 
             case 2:
-                HabSelectCustom(HabTargetType.enemy, h2Range, h2Area, transform.position);
+                HabSelectArea(HabTargetType.ally, 0, transform.position);
                 break;
 
             case 3:
-                HabSelectSingle(HabTargetType.ally, h3Range, transform.position);
+                HabSelectArea(HabTargetType.enemy, h3Area, transform.position);
+                break;
+
+            case 4:
+                HabSelectSingle(HabTargetType.enemy, h4Range, transform.position);
                 break;
         }
 
@@ -196,15 +242,15 @@ public class SandStormObelisk : PjBase
         switch (hab)
         {
             default:
-                return "";
+                return "Armadura tectónica";
             case 1:
-                return "Pulso de arena";
+                return "Golpe colosal";
             case 2:
-                return "Invocar la tormenta";
+                return "Fortificación";
             case 3:
-                return "Vinculo de la tormenta";
+                return "Quebrar";
             case 4:
-                return "";
+                return "Lanzamiento de roca";
         }
     }
     public override string GetHabDescription(int hab)
@@ -212,53 +258,17 @@ public class SandStormObelisk : PjBase
         switch (hab)
         {
             default:
-                return "";
+                return "Si es aturdido desactiva esta pasiva en su lugar";
             case 1:
-                return "Lanza un pulso de viento que explota y daña " + CalculateSinergy(h1Dmg).ToString("F0") + " a sus enemigos";
+                return "Lanza un puñetazo a un enemigo y lo daña " + CalculateStrength(h1Dmg1).ToString("F0") + ". " +
+                       "El segundo golpe en el mismo turno hace " + CalculateStrength(h1Dmg2).ToString("F0") + " de daño en su lugar";
             case 2:
-                return "Invoca una tormenta de arena que daña " + CalculateSinergy(h2Dmg).ToString("F0") + " a los enemigos atrapados en su interior," +
-                       " la tormenta también se puede invocar en la posición del aliado vinculado con Vínculo tormentoso";
+                return "Conjura un escudo y se protege " + CalculateControl(h2Amount).ToString("F0") + " con él";
             case 3:
-                return "Se vincula con un aliado, perdiendo un vínculo anterior si lo hubiera, concediendo al aliado" +
-                       " velocidad " + CalculateControl(h3StatsToChange.spd).ToString("F0") + ", movimiento " + h3StatsToChange.movement + " y" +
-                       " resistencia mágica" + CalculateControl(h3StatsToChange.mRes).ToString("F0");
+                return " Da un pisotón lanzando una onda sísmica que debilita a los enemigos " + CalculateControl(h3StatsToChange.res).ToString("F0") + " " +
+                       "y los daña " + CalculateStrength(h3Dmg).ToString("F0");
             case 4:
-                return "";
+                return "Lanza una roca y aturde a un enemigo, haciendo daño por " + CalculateStrength(h4Dmg).ToString("F0");
         }
-    }
-
-    public void HabSelectCustom(HabTargetType habTargetType, int range, int area, Vector2 originPos)
-    {
-        singleIndicator.SetActive(true);
-        areaIndicator.SetActive(true);
-        areaIndicator.transform.position = UtilsClass.GetMouseWorldPosition();
-        singleIndicator.transform.localScale = new Vector3(range * 2 + 1, range * 2 + 1, range * 2 + 1);
-        areaIndicator.transform.localScale = new Vector3(area, area, area);
-
-        GameManager.Instance.UnselectAll();
-        Vector2 cell = GameManager.Instance.selectedCell;
-
-
-        if (CheckRange(originPos, cell, range) || (GameManager.Instance.selectedPj == linkedPj && linkedPj != null))
-        {
-            Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(cell, new Vector2(area, area), 0, GameManager.Instance.unitLayer);
-            PjBase pj;
-
-
-            foreach (Collider2D enemyColl in enemiesHit)
-            {
-                pj = enemyColl.GetComponent<PjBase>();
-                if (pj.team != team)
-                {
-                    pj.HSelect(true);
-                }
-
-            }
-        }
-        else
-        {
-            areaIndicator.SetActive(false);
-        }
-
     }
 }

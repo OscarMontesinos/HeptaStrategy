@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skipTurn: 0
-  team: 0
+  team: 1
   stats:
     lvl: 5
     turn: 5
@@ -192,6 +192,8 @@ MonoBehaviour:
   pStatsToChange:
     pot: 0
     res: 60
+    fRes: 0
+    mRes: 0
     spd: 0
     movement: 0
     regen: 25

@@ -97,7 +97,17 @@ public class RockScorpion : PjBase
                                 if (target.hSelected && target != this)
                                 {
                                     activated = true;
-                                    if (target.stats.res < 0)
+                                    bool isDeb = false;
+
+                                    foreach(Buff buff in target.buffList)
+                                    {
+                                        if(buff.statsToChange.res < 0 || buff.statsToChange.fRes < 0 || buff.statsToChange.mRes < 0)
+                                        {
+                                            isDeb = true;
+                                        }
+                                    }
+
+                                    if (isDeb)
                                     {
                                         DealDmg(target, DmgType.magical, CalculateStrength(h3Dmg * 2));
                                     }
@@ -194,11 +204,11 @@ public class RockScorpion : PjBase
             default:
                 return "";
             case 1:
-                return "Maleficio de la mordida";
+                return "Tenaza de roca";
             case 2:
-                return "Ritual impuro";
+                return "Asalto imparable";
             case 3:
-                return "";
+                return "Empalar";
             case 4:
                 return "";
         }

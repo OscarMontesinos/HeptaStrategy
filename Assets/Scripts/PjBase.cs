@@ -239,6 +239,7 @@ public class PjBase : MonoBehaviour
         {
             wasJustStuned = false;
         }
+        stats.extraMov = 0;
         UpdateUI();
 
         foreach (Invocation invocation in invocationList)
@@ -426,33 +427,47 @@ public class PjBase : MonoBehaviour
 
         GameManager.Instance.UnselectAll();
         PjBase targetPj = GameManager.Instance.selectedPj;
+        Vector2 cell = GameManager.Instance.selectedCell;
 
 
         if (targetPj && CheckRange(originPos, targetPj.transform.position, range))
         {
+            Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(cell, new Vector2(area, area), 0, GameManager.Instance.unitLayer); 
+            PjBase pj;
+
             switch (habTargetType)
             {
                 case HabTargetType.none:
                     break;
 
                 case HabTargetType.enemy:
-                    if (targetPj.team != team)
+                    foreach (Collider2D enemyColl in enemiesHit)
                     {
-                        targetPj.HSelect(true); 
-                        areaIndicator.SetActive(true);
+                        pj = enemyColl.GetComponent<PjBase>();
+                        if (pj.team != team)
+                        {
+                            pj.HSelect(true);
+                        }
+
                     }
                     break;
 
                 case HabTargetType.ally:
-                    if (targetPj.team == team)
+                    foreach (Collider2D enemyColl in enemiesHit)
                     {
-                        targetPj.HSelect(true);
-                        areaIndicator.SetActive(true);
+                        pj = enemyColl.GetComponent<PjBase>();
+                        if (pj.team == team)
+                        {
+                            pj.HSelect(true);
+                        }
                     }
                     break;
                 case HabTargetType.both:
-                    targetPj.HSelect(true);
-                    areaIndicator.SetActive(true);
+                    foreach (Collider2D enemyColl in enemiesHit)
+                    {
+                        pj = enemyColl.GetComponent<PjBase>();
+                        pj.HSelect(true);
+                    }
                     break;
             }
         }
@@ -574,6 +589,7 @@ public class PjBase : MonoBehaviour
 
     public void HabSelectArea(HabTargetType habTargetType, int area, Vector2 originPos)
     {
+        areaIndicator.GetComponent<MapPlacer>().alternativeMethod = GetComponent<MapPlacer>().alternativeMethod;
         areaIndicator.SetActive(true);
         areaIndicator.transform.position = originPos;
         areaIndicator.transform.localScale = new Vector3(area * 2 + 1, area * 2 + 1, area * 2 + 1);
@@ -657,7 +673,7 @@ public class PjBase : MonoBehaviour
     {
         float distX = MathF.Abs(targetPos.x - originPos.x);
         float distY = MathF.Abs(targetPos.y - originPos.y);
-        return (distX <= range && distY <= range);
+        return (distX <= range + 0.5f && distY <= range + 0.5f);
     }
 
     public IEnumerator Die()

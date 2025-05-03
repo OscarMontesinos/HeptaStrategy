@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
                             (pj.stats.fRes + pj.stats.res).ToString("F0") + "\n" +
                             (pj.stats.mRes + pj.stats.res).ToString("F0") + "\n" +
                             pj.stats.spd.ToString("F0") + "\n" +
-                            pj.stats.movement.ToString("F0");
+                            (pj.stats.movement + pj.stats.extraMov).ToString("F0");
 
             if(pj.stats.pot > 0)
             {
@@ -145,6 +145,15 @@ public class UIManager : MonoBehaviour
             hpBar.value = pj.stats.hp;
             shieldBar.maxValue = pj.stats.mHp;
             shieldBar.value = pj.stats.shield;
+        }
+    }
+
+    public void AddMov()
+    {
+        if(pj.stats.turn > 0)
+        {
+            pj.stats.turn--;
+            pj.stats.extraMov++;
         }
     }
 }

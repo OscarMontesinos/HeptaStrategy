@@ -140,7 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec04b338f90a1ea4a82cb1a8fe95dfa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  skipTurn: 0
+  team: 1
   stats:
     lvl: 5
     turn: 5
@@ -157,11 +158,13 @@ MonoBehaviour:
     res: 0
     spd: 20
     movement: 4
+    extraMov: 0
   buffList: []
   invocationList: []
   isStuned: 0
   wasJustStuned: 0
   turno: 0
+  hasTurn: 0
   habSelected: 0
   turnIndicator: {fileID: 8901249484603620929}
   hSelectedIndicator: {fileID: 6334909021977349656}
@@ -180,7 +183,7 @@ MonoBehaviour:
   h1MaxRTimesPistol: 3
   h1Turn: 2
   h1TurnPistol: 1
-  h1Range: 6
+  h1Range: 5
   h1Dmg: 25
   h2Cd: 1
   h2Turn: 1
@@ -188,11 +191,11 @@ MonoBehaviour:
   h2Dmg: 20
   h3MaxRTimes: 1
   h3Turn: 2
-  h3Range: 8
+  h3Range: 7
   h3Dmg: 35
   h4MaxRTimes: 1
   h4Turn: 1
-  h4Range: 4
+  h4Range: 3
   h4Dmg: 42.5
 --- !u!114 &5796051908906568575 stripped
 MonoBehaviour:

@@ -8,6 +8,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 829911853704491088, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.673091
+      objectReference: {fileID: 0}
+    - target: {fileID: 829911853704491088, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.673091
+      objectReference: {fileID: 0}
+    - target: {fileID: 829911853704491088, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.673091
+      objectReference: {fileID: 0}
+    - target: {fileID: 829911853704491088, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -27,21 +39,49 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4042244713431347903, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749362961411870848, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.1399014
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749362961411870848, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.1399014
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749362961411870848, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.1399014
+      objectReference: {fileID: 0}
     - target: {fileID: 6293454604604121524, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7356342854477014665, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.1137
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356342854477014665, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.1137
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356342854477014665, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.1137
+      objectReference: {fileID: 0}
     - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.b
-      value: 0.09033466
+      value: 0.11863652
       objectReference: {fileID: 0}
     - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.g
-      value: 0.6603774
+      value: 0.42670718
       objectReference: {fileID: 0}
     - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.r
-      value: 0.57782793
+      value: 0.5849056
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484304, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_RootOrder
@@ -49,11 +89,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484304, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.9727793
+      value: -1.979
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484304, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.123191
+      value: -19.001
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484304, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -99,9 +139,17 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.8207547
       objectReference: {fileID: 0}
+    - target: {fileID: 8345205438217484306, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_Radius
+      value: 0.8159922
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345205438217484307, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: alternativeMethod
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484310, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Name
-      value: Zayd
+      value: RockColossus
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6660742372777506698, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
@@ -136,7 +184,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8345205438217484310, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
   m_PrefabInstance: {fileID: 4487689534776536686}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3563886521524196555
+--- !u!114 &4004184555389533241
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,26 +193,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 5591036399056557688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3d5b4ab94fbc04459ee2c2307529fa6, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b334feab65826d449c74016ace11165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skipTurn: 0
-  team: 1
+  team: 0
   stats:
     lvl: 5
     turn: 5
-    mHp: 40
+    mHp: 85
     hp: 0
     regen: 0
     pot: 0
     shield: 0
-    sinergy: 30
-    strength: 5
-    control: 45
-    fRes: 15
-    mRes: 35
+    sinergy: 15
+    strength: 45
+    control: 30
+    fRes: 50
+    mRes: 20
     res: 0
-    spd: 10
+    spd: 5
     movement: 4
   buffList: []
   invocationList: []
@@ -186,36 +234,32 @@ MonoBehaviour:
   singleIndicator: {fileID: 8353221101954409829}
   areaIndicator: {fileID: 459237404752043217}
   extensionIndicator: {fileID: 4487689533072906007}
-  pStatsToChange:
-    pot: 30
-    res: 30
-    fRes: 0
-    mRes: 0
-    spd: 30
-    movement: 0
-    regen: 0
-  pFx: {fileID: 5632305965621731266, guid: e7ce0624598cb064983a7e76c4a3a18e, type: 3}
-  pDmg: 15
-  pDmgMultiplier: 2
-  pDuration: 2
   h1MaxRTimes: 2
   h1Turn: 2
-  h1Range: 5
-  h1Area: 3
-  h1Dmg: 25
-  h2Cd: 1
+  h1Range: 1
+  h1Dmg1: 35
+  h1Dmg2: 65
+  h2Cd: 5
   h2Turn: 3
-  h2Range: 4
-  h2Area: 5
-  h2Dmg: 35
+  h2Duration: 3
+  h2Amount: 150
   h3Cd: 2
-  h3Turn: 2
-  h3Range: 6
-  h3Dmg: 25
-  h4MaxRTimes: 2
-  h4Turn: 1
-  h4Range: 6
-  h4Dmg: 12.5
+  h3Turn: 3
+  h3Area: 4
+  h3Dmg: 40
+  h3StatsToChange:
+    pot: 0
+    res: 55
+    fRes: 0
+    mRes: 0
+    spd: 0
+    movement: 0
+    regen: 0
+  h3Duration: 2
+  h4Cd: 3
+  h4Turn: 3
+  h4Range: 4
+  h4Dmg: 50
 --- !u!114 &5796051908906568575 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7937822330784195857, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}

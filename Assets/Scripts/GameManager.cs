@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         {
             while(i2 < pjList.Count-1)
             {
-                if (pjList[i2 + 1].stats.spd > pjList[i2].stats.spd)
+                if (pjList[i2].hasTurn && pjList[i2 + 1].stats.spd > pjList[i2].stats.spd)
                 {
                     PjBase pj = pjList[i2 + 1];
                     pjList[i2 + 1] = pjList[i2];
@@ -133,6 +133,8 @@ public class GameManager : MonoBehaviour
     {
         pjList[actualTurn].EndTurn();
 
+        CalculateTurnOrder();
+
         while (!pjList[actualTurn].hasTurn || pjList[actualTurn].skipTurn)
         {
             actualTurn++;
@@ -154,6 +156,8 @@ public class GameManager : MonoBehaviour
                     pj.hasTurn = true;
                 }
             }
+
+            CalculateTurnOrder();
         }
 
         StartTurn();
@@ -179,9 +183,13 @@ public class GameManager : MonoBehaviour
     {
         if (!target.skipTurn)
         {
-            if (pjList.IndexOf(target) <= actualTurn)
+            if (pjList.IndexOf(target) <= actualTurn && pjList.IndexOf(target) >= 0)
             {
                 actualTurn--;
+            }
+            else if (target.turno)
+            {
+                NextTurn();
             }
             pjList.Remove(target);
         }

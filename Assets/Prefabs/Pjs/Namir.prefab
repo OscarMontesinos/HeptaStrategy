@@ -541,7 +541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf9887fa6e4360419a08c88e4ab920d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  skipTurn: 0
+  team: 1
   stats:
     lvl: 5
     turn: 5
@@ -563,6 +564,7 @@ MonoBehaviour:
   isStuned: 0
   wasJustStuned: 0
   turno: 0
+  hasTurn: 0
   habSelected: 0
   turnIndicator: {fileID: 8901249484603620929}
   hSelectedIndicator: {fileID: 6334909021977349656}

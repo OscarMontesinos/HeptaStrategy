@@ -26,4 +26,5 @@ public class Stats
     public float res;
     public float spd;
     public int movement = 4;
+    public int extraMov;
 }

@@ -442,13 +442,17 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5157666403759383584, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6913070719913199202, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7141445721276721997, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.b
@@ -567,7 +571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880b7f36fb3e1ee4a8d85c27b56542e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  skipTurn: 0
+  team: 1
   stats:
     lvl: 5
     turn: 5
@@ -589,6 +594,7 @@ MonoBehaviour:
   isStuned: 0
   wasJustStuned: 0
   turno: 0
+  hasTurn: 0
   habSelected: 0
   turnIndicator: {fileID: 8901249484603620929}
   hSelectedIndicator: {fileID: 6334909021977349656}

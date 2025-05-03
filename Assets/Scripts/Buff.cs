@@ -59,7 +59,6 @@ public class Buff : MonoBehaviour
         target.stats.movement += this.statsToChange.movement;
         target.stats.regen += this.statsToChange.regen;
 
-
         if (particleFx)
         {
             this.particleFx = Instantiate(particleFx, target.transform);
