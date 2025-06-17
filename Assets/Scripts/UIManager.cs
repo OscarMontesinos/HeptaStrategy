@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI statsTxt;
     public TextMeshProUGUI habNameTxt;
     public TextMeshProUGUI habDescriptionTxt;
+    public TextMeshProUGUI habTurnTxt;
     public TextMeshProUGUI nameTxt;
 
     public Slider hpBar;
@@ -139,6 +140,7 @@ public class UIManager : MonoBehaviour
             }
 
             habNameTxt.text = pj.GetHabName(pj.habSelected);
+            habTurnTxt.text = pj.GetHabTurn(pj.habSelected);
             habDescriptionTxt.text = pj.GetHabDescription(pj.habSelected);
 
             hpBar.maxValue = pj.stats.mHp;

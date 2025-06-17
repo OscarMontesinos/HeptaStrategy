@@ -13,7 +13,6 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class PjBase : MonoBehaviour
 {
-    public bool skipTurn;
     public int team;
     public Stats stats;
     [HideInInspector]
@@ -30,6 +29,7 @@ public class PjBase : MonoBehaviour
     public bool hasTurn;
     [HideInInspector]
     public int habSelected;
+    public int turnHabSelected;
     public GameObject turnIndicator;
     public GameObject hSelectedIndicator;
     public GameObject stunIndicator;
@@ -45,6 +45,7 @@ public class PjBase : MonoBehaviour
     public GameObject singleIndicator;
     public GameObject areaIndicator;
     public GameObject extensionIndicator;
+    float indicatorModifier = 1;
 
     public enum DmgType
     {
@@ -95,6 +96,10 @@ public class PjBase : MonoBehaviour
         hpBar.maxValue = stats.mHp;
         shieldBar.maxValue = stats.mHp;
         nameText.text = name;
+        if(stats.size % 2 == 0)
+        {
+            indicatorModifier = 2;
+        }
         UpdateUI();
     }
 
@@ -125,10 +130,6 @@ public class PjBase : MonoBehaviour
         stats.fRes = stats.fRes * 2.5f;
         stats.mRes = stats.mRes * 2.5f;
         stats.spd = stats.spd * 2.5f;
-        if(skipTurn)
-        {
-            stats.spd = -9999;
-        }
 
         float lvlMultiplier = (float)(stats.lvl + 5) / 40;
 
@@ -168,19 +169,19 @@ public class PjBase : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SelectHab(1);
+            SelectHab(1,0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SelectHab(2);
+            SelectHab(2,0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SelectHab(3);
+            SelectHab(3,0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            SelectHab(4);
+            SelectHab(4,0);
         }
     }
     public virtual void ManageHabIndicators()
@@ -262,10 +263,11 @@ public class PjBase : MonoBehaviour
         turnIndicator.SetActive(false);
     }
 
-    public void SelectHab(int habSelected)
+    public void SelectHab(int habSelected, int turn)
     {
         DisableIndicators();
-       this.habSelected = habSelected;
+        this.habSelected = habSelected;
+        turnHabSelected = turn;
     }
 
     public virtual float CalculateSinergy(float value)
@@ -384,7 +386,7 @@ public class PjBase : MonoBehaviour
     public void HabSelectSingle(HabTargetType habTargetType, int range, Vector2 originPos)
     {
         singleIndicator.SetActive(true);
-        singleIndicator.transform.localScale = new Vector3(range * 2 + 1, range * 2 + 1, range * 2 + 1);
+        singleIndicator.transform.localScale = new Vector3(range * 2 + indicatorModifier, range * 2 + indicatorModifier, range * 2 + indicatorModifier);
 
         GameManager.Instance.UnselectAll();
         PjBase targetPj = GameManager.Instance.selectedPj;
@@ -421,7 +423,7 @@ public class PjBase : MonoBehaviour
     {
         singleIndicator.SetActive(true);
         areaIndicator.SetActive(true);
-        singleIndicator.transform.localScale = new Vector3(range * 2 + 1, range * 2 + 1, range * 2 + 1);
+        singleIndicator.transform.localScale = new Vector3(range * 2 + indicatorModifier, range * 2 + indicatorModifier, range * 2 + indicatorModifier);
         areaIndicator.transform.position = UtilsClass.GetMouseWorldPosition();
         areaIndicator.transform.localScale = new Vector3(area, area, area);
 
@@ -482,7 +484,7 @@ public class PjBase : MonoBehaviour
         singleIndicator.SetActive(true);
         areaIndicator.SetActive(true);
         areaIndicator.transform.position = UtilsClass.GetMouseWorldPosition();
-        singleIndicator.transform.localScale = new Vector3(range * 2 + 1, range * 2 + 1, range * 2 + 1);
+        singleIndicator.transform.localScale = new Vector3(range * 2 + indicatorModifier, range * 2 + indicatorModifier, range * 2 + indicatorModifier);
         areaIndicator.transform.localScale = new Vector3(area, area, area);
 
         GameManager.Instance.UnselectAll();
@@ -541,13 +543,13 @@ public class PjBase : MonoBehaviour
         extensionIndicator.SetActive(true);
         extensionIndicator.transform.position = originPos;
         extensionIndicator.transform.up = (Vector2)UtilsClass.GetMouseWorldPosition() - originPos;
-        extensionIndicator.transform.GetChild(0).localScale = new Vector3(wide, range, 1);
+        extensionIndicator.transform.GetChild(0).localScale = new Vector3(wide + (indicatorModifier - 1), range, 1);
 
         GameManager.Instance.UnselectAll();
         Vector2 cell = GameManager.Instance.selectedCell;
 
 
-        Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(extensionIndicator.transform.GetChild(0).GetChild(0).position, new Vector2(wide, range), extensionIndicator.transform.localEulerAngles.z, GameManager.Instance.unitLayer);
+        Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(extensionIndicator.transform.GetChild(0).GetChild(0).position, new Vector2(wide + (indicatorModifier - 1), range), extensionIndicator.transform.localEulerAngles.z, GameManager.Instance.unitLayer);
         PjBase pj;
 
         switch (habTargetType)
@@ -592,7 +594,7 @@ public class PjBase : MonoBehaviour
         areaIndicator.GetComponent<MapPlacer>().alternativeMethod = GetComponent<MapPlacer>().alternativeMethod;
         areaIndicator.SetActive(true);
         areaIndicator.transform.position = originPos;
-        areaIndicator.transform.localScale = new Vector3(area * 2 + 1, area * 2 + 1, area * 2 + 1);
+        areaIndicator.transform.localScale = new Vector3(area * 2 + indicatorModifier, area * 2 + indicatorModifier, area * 2 + indicatorModifier);
 
         GameManager.Instance.UnselectAll();
 
@@ -652,6 +654,17 @@ public class PjBase : MonoBehaviour
                 return "";
         }
     }
+    public virtual string GetHabTurn(int hab)
+    {
+        if (hab > 0)
+        {
+            return "Turn: " + turnHabSelected;
+        }
+        else
+        {
+            return "Turn: 0";
+        }
+    }
     public virtual string GetHabDescription(int hab)
     {
         switch (hab)
@@ -673,7 +686,7 @@ public class PjBase : MonoBehaviour
     {
         float distX = MathF.Abs(targetPos.x - originPos.x);
         float distY = MathF.Abs(targetPos.y - originPos.y);
-        return (distX <= range + 0.5f && distY <= range + 0.5f);
+        return (distX <= range + (stats.size *0.5f) && distY <= range + (stats.size * 0.5f));
     }
 
     public IEnumerator Die()

@@ -164,15 +164,15 @@ public class RockScorpion : PjBase
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && stats.turn >= h1Turn && h1CurrentTimes > 0)
         {
-            SelectHab(1);
+            SelectHab(1, h1Turn);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && stats.turn >= h2Turn && h2CurrentCd <= 0)
         {
-            SelectHab(2);
+            SelectHab(2, h2Turn);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && stats.turn >= h3Turn && h3CurrentCd <= 0)
         {
-            SelectHab(3);
+            SelectHab(3, h3Turn);
         }
     }
     public override void ManageHabIndicators()
@@ -224,7 +224,7 @@ public class RockScorpion : PjBase
             case 2:
                 return "Avanza a través de sus enemigos dañandolos por " + CalculateStrength(h2Dmg).ToString("F0") + " y ralentizándolos";
             case 3:
-                return "Lanza un golpe punzante con su aguijón que causa " + CalculateStrength(h3Dmg).ToString("F0") + " de daño, " + CalculateStrength(h3Dmg).ToString("F0") + " si el objetivo está debilitado";
+                return "Lanza un golpe punzante con su aguijón que causa " + CalculateStrength(h3Dmg).ToString("F0") + " de daño, " + CalculateStrength(h3Dmg * 2).ToString("F0") + " si el objetivo está debilitado";
             case 4:
                 return "";
         }

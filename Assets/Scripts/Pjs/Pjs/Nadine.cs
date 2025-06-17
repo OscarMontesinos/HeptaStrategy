@@ -212,29 +212,29 @@ public class Nadine : PjBase
                 case Weapon.pistol:
                     if (stats.turn >= h1TurnPistol && h1CurrentTimes > 0)
                     {
-                        SelectHab(1);
+                        SelectHab(1, h1Turn);
                     }
                     break;
 
                 default:
                     if (stats.turn >= h1Turn && h1CurrentTimes > 0)
                     {
-                        SelectHab(1);
+                        SelectHab(1, h1Turn);
                     }
                     break;
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && stats.turn >= h2Turn && h2CurrentCd <= 0)
         {
-            SelectHab(2);
+            SelectHab(2, h2Turn);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && stats.turn >= h3Turn && h3CurrentTimes > 0)
         {
-            SelectHab(3);
+            SelectHab(3, h3Turn);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && stats.turn >= h4Turn && h4CurrentTimes > 0)
         {
-            SelectHab(4);
+            SelectHab(4, h4Turn);
         }
     }
     public override void ManageHabIndicators()

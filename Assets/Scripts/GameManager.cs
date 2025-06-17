@@ -80,6 +80,12 @@ public class GameManager : MonoBehaviour
 
         CalculateTurnOrder();
 
+
+        foreach (PjBase pj in pjList)
+        {
+            pj.hasTurn = true;
+        }
+
         StartTurn();
     }
 
@@ -120,13 +126,7 @@ public class GameManager : MonoBehaviour
         i1++;
         }
 
-        foreach (PjBase pj in pjList)
-        {
-            if (!pj.skipTurn)
-            {
-                pj.hasTurn = true;
-            }
-        }
+        
     }
 
     public void NextTurn()
@@ -134,11 +134,11 @@ public class GameManager : MonoBehaviour
         pjList[actualTurn].EndTurn();
 
         CalculateTurnOrder();
+        actualTurn = 0;
 
-        while (!pjList[actualTurn].hasTurn || pjList[actualTurn].skipTurn)
+        while (!pjList[actualTurn].hasTurn && actualTurn < pjList.Count)
         {
             actualTurn++;
-
             if (actualTurn >= pjList.Count)
             {
                 break;
@@ -149,15 +149,10 @@ public class GameManager : MonoBehaviour
         {
             actualTurn = 0;
 
-            foreach(PjBase pj in pjList)
+            foreach (PjBase pj in pjList)
             {
-                if (!pj.skipTurn)
-                {
-                    pj.hasTurn = true;
-                }
+                pj.hasTurn = true;
             }
-
-            CalculateTurnOrder();
         }
 
         StartTurn();
@@ -181,18 +176,16 @@ public class GameManager : MonoBehaviour
     }
     public void Kill(PjBase target)
     {
-        if (!target.skipTurn)
+        if (pjList.IndexOf(target) <= actualTurn && pjList.IndexOf(target) >= 0)
         {
-            if (pjList.IndexOf(target) <= actualTurn && pjList.IndexOf(target) >= 0)
-            {
-                actualTurn--;
-            }
-            else if (target.turno)
-            {
-                NextTurn();
-            }
-            pjList.Remove(target);
+            actualTurn--;
         }
+        else if (target.turno)
+        {
+            NextTurn();
+        }
+        pjList.Remove(target);
+
         Destroy(target.gameObject);
     }
 }

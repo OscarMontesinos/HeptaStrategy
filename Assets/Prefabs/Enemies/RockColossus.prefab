@@ -196,11 +196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b334feab65826d449c74016ace11165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipTurn: 0
   team: 0
   stats:
     lvl: 5
     turn: 5
+    size: 2
     mHp: 85
     hp: 0
     regen: 0
@@ -214,6 +214,7 @@ MonoBehaviour:
     res: 0
     spd: 5
     movement: 4
+    extraMov: 0
   buffList: []
   invocationList: []
   isStuned: 0

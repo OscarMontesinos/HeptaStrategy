@@ -158,15 +158,15 @@ public class SandStormObelisk : PjBase
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && stats.turn >= h1Turn && h1CurrentTimes > 0)
         {
-            SelectHab(1);
+            SelectHab(1,h1Turn);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && stats.turn >= h2Turn && h2CurrentCd <= 0)
         {
-            SelectHab(2);
+            SelectHab(2, h2Turn);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && stats.turn >= h3Turn)
         {
-            SelectHab(3);
+            SelectHab(3, h3Turn);
         }
     }
     public override void ManageHabIndicators()

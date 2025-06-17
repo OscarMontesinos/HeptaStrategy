@@ -196,19 +196,19 @@ public class RockColossus : PjBase
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && stats.turn >= h1Turn && h1CurrentTimes > 0)
         {
-            SelectHab(1);
+            SelectHab(1, h1Turn);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && stats.turn >= h2Turn && h2CurrentCd <= 0)
         {
-            SelectHab(2);
+            SelectHab(2, h2Turn);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && stats.turn >= h3Turn && h3CurrentCd <= 0)
         {
-            SelectHab(3);
+            SelectHab(3, h3Turn);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && stats.turn >= h4Turn && h4CurrentCd <= 0)
         {
-            SelectHab(4);
+            SelectHab(4, h4Turn);
         }
     }
     public override void ManageHabIndicators()

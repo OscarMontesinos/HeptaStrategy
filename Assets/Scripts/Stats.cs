@@ -8,6 +8,7 @@ public class Stats
 {
     public int lvl = 5;
     public int turn = 5;
+    public int size = 1;
     public float mHp;
     [HideInInspector]
     public float hp;

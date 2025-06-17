@@ -328,19 +328,19 @@ public class Zafir : PjBase
                 case Weapon.spear:
                     if (stats.turn >= h1TurnSpear && h1CurrentTimes > 0)
                     {
-                        SelectHab(1);
+                        SelectHab(1, h1TurnSpear);
                     }
                     break;
                 case Weapon.shield:
                     if (stats.turn >= h1TurnShield && h1CurrentTimes > 0)
                     {
-                        SelectHab(1);
+                        SelectHab(1, h1TurnShield);
                     }
                     break;
                 case Weapon.gloves:
                     if (stats.turn >= h1TurnGloves && h1CurrentTimes > 0)
                     {
-                        SelectHab(1);
+                        SelectHab(1, h1TurnGloves);
                     }
                     break;
 
@@ -348,15 +348,15 @@ public class Zafir : PjBase
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && stats.turn >= h2Turn && h2CurrentCd <= 0)
         {
-            SelectHab(2);
+            SelectHab(2, h2Turn);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && ((stats.turn >= h3Turn && h3CurrentCd <= 0) || (h3Active && stats.turn >= h3ExtraTurn)))
         {
-            SelectHab(3);
+            SelectHab(3, h3Turn);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && stats.turn >= h4Turn && h4CurrentCd <= 0)
         {
-            SelectHab(4);
+            SelectHab(4, h4Turn);
         }
     }
     public override void ManageHabIndicators()
