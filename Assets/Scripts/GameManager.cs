@@ -78,13 +78,12 @@ public class GameManager : MonoBehaviour
 
         SetTeamColors();
 
-        CalculateTurnOrder();
-
-
         foreach (PjBase pj in pjList)
         {
             pj.hasTurn = true;
         }
+
+        CalculateTurnOrder();
 
         StartTurn();
     }
@@ -125,8 +124,6 @@ public class GameManager : MonoBehaviour
             i2 = 0;
         i1++;
         }
-
-        
     }
 
     public void NextTurn()

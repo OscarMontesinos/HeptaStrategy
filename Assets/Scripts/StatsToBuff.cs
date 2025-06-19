@@ -7,6 +7,7 @@ using UnityEngine;
 public class StatsToBuff
 {
     public float pot;
+    public float con;
     public float res;
     public float fRes;
     public float mRes;

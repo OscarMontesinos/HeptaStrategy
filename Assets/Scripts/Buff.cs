@@ -30,6 +30,7 @@ public class Buff : MonoBehaviour
 
 
         this.statsToChange.pot = user.CalculateControl(statsToChange.pot);
+        this.statsToChange.control = user.CalculateControl(statsToChange.con);
         this.statsToChange.res = user.CalculateControl(statsToChange.res);
         this.statsToChange.mRes = user.CalculateControl(statsToChange.mRes);
         this.statsToChange.fRes = user.CalculateControl(statsToChange.fRes);
@@ -44,6 +45,7 @@ public class Buff : MonoBehaviour
         if (isDebuff)
         {
             this.statsToChange.pot = -this.statsToChange.pot;
+            this.statsToChange.control = -this.statsToChange.control;
             this.statsToChange.res = -this.statsToChange.res;
             this.statsToChange.mRes = -this.statsToChange.mRes;
             this.statsToChange.fRes = -this.statsToChange.fRes;
@@ -52,6 +54,7 @@ public class Buff : MonoBehaviour
             this.statsToChange.regen = -this.statsToChange.regen;
         }
         target.stats.pot += this.statsToChange.pot;
+        target.stats.control += this.statsToChange.control;
         target.stats.res += this.statsToChange.res;
         target.stats.mRes += this.statsToChange.mRes;
         target.stats.fRes += this.statsToChange.fRes;
@@ -81,6 +84,7 @@ public class Buff : MonoBehaviour
     public virtual void Reset()
     {
         target.stats.pot -= statsToChange.pot;
+        target.stats.control -= statsToChange.control;
         target.stats.res -= statsToChange.res;
         target.stats.strength -= statsToChange.pot;
         target.stats.sinergy -= statsToChange.pot;

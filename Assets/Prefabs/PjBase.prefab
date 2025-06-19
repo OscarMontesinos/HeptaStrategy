@@ -929,7 +929,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 15, y: 10}
+  m_SizeDelta: {x: 2.779, y: 2.118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7886748874049872123
 Canvas:
@@ -1248,6 +1248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPosEditable: 0
+  alternativeMethod: 0
 --- !u!1 &4402734495419045345
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,6 +2049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPosEditable: 1
+  alternativeMethod: 0
 --- !u!58 &8345205438217484306
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2076,11 +2078,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcda7ca1a9534a64080bbd5dafd26f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipTurn: 0
   team: 1
   stats:
     lvl: 5
     turn: 5
+    size: 1
     mHp: 30
     hp: 10
     regen: 0
@@ -2094,6 +2096,7 @@ MonoBehaviour:
     res: 0
     spd: 10
     movement: 4
+    extraMov: 0
   buffList: []
   invocationList: []
   isStuned: 0
@@ -2101,6 +2104,7 @@ MonoBehaviour:
   turno: 0
   hasTurn: 0
   habSelected: 0
+  turnHabSelected: 0
   turnIndicator: {fileID: 5026279848045875247}
   hSelectedIndicator: {fileID: 7614856808094982262}
   stunIndicator: {fileID: 1694183438789544873}

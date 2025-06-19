@@ -542,7 +542,7 @@ public class PjBase : MonoBehaviour
     {
         extensionIndicator.SetActive(true);
         extensionIndicator.transform.position = originPos;
-        extensionIndicator.transform.up = (Vector2)UtilsClass.GetMouseWorldPosition() - originPos;
+        extensionIndicator.transform.up = GameManager.Instance.selectedCell - originPos;
         extensionIndicator.transform.GetChild(0).localScale = new Vector3(wide + (indicatorModifier - 1), range, 1);
 
         GameManager.Instance.UnselectAll();
@@ -588,8 +588,12 @@ public class PjBase : MonoBehaviour
         }
 
     }
-
     public void HabSelectArea(HabTargetType habTargetType, int area, Vector2 originPos)
+    {
+        HabSelectArea(habTargetType, area, originPos, false);
+    }
+
+    public void HabSelectArea(HabTargetType habTargetType, int area, Vector2 originPos, bool selectSelf)
     {
         areaIndicator.GetComponent<MapPlacer>().alternativeMethod = GetComponent<MapPlacer>().alternativeMethod;
         areaIndicator.SetActive(true);
@@ -610,7 +614,11 @@ public class PjBase : MonoBehaviour
                 foreach (Collider2D enemyColl in enemiesHit)
                 {
                     pj = enemyColl.GetComponent<PjBase>();
-                    if (pj.team != team)
+                    if (pj.team != team && !selectSelf)
+                    {
+                        pj.HSelect(true);
+                    }
+                    else if(selectSelf && pj==this)
                     {
                         pj.HSelect(true);
                     }
