@@ -15,9 +15,11 @@ public class Mary : PjBase
     public float oAShieldAmount;
     public int oAShieldDuration;
     public float oEDmg;
+    public GameObject vAFx;
     public StatsToBuff vAStatsToChange;
     public int vAPotDuration;
     public float vEDmg;
+    public GameObject vEFx;
     public StatsToBuff vEStatsToChange;
     public int vEPotDuration;
     public float cAHeal;
@@ -50,7 +52,7 @@ public class Mary : PjBase
                 {
                     if (target != null)
                     {
-                        if (target.hSelected && target != this)
+                        if (target.hSelected)
                         {
                             if(target.team == team)
                             {
@@ -63,12 +65,14 @@ public class Mary : PjBase
                                         break;
                                     case SongParts.verse:
                                         StatsToBuff statsToChange = vAStatsToChange;
+                                        int duration = vAPotDuration;
                                         if(target == this)
                                         {
                                             statsToChange.con = statsToChange.pot;
+                                            duration++;
                                         }
                                         Buff buff = target.gameObject.AddComponent<Buff>();
-                                        buff.NormalSetUp(this, target, vAStatsToChange, vAPotDuration, null, false);
+                                        buff.NormalSetUp(this, target, statsToChange, duration, vAFx, false);
                                         target.buffList.Add(buff);
                                         break;
                                     case SongParts.chorus:
@@ -88,7 +92,7 @@ public class Mary : PjBase
                                     case SongParts.verse:
                                         DealDmg(target, DmgType.magical, CalculateSinergy(vEDmg));
                                         Buff buff = target.gameObject.AddComponent<Buff>();
-                                        buff.NormalSetUp(this, target, vEStatsToChange, vEPotDuration, null, false);
+                                        buff.NormalSetUp(this, target, vEStatsToChange, vEPotDuration, vEFx, true);
                                         target.buffList.Add(buff);
                                         break;
                                     case SongParts.chorus:
@@ -107,7 +111,7 @@ public class Mary : PjBase
                         break;
                     case 1:
                         actualPart++;
-                        if (actualPart > songStructure.Count)
+                        if (actualPart >= songStructure.Count)
                         {
                             actualPart = 0;
                         }
@@ -131,7 +135,7 @@ public class Mary : PjBase
                         break;
                     case 3:
                         actualPart++;
-                        if (actualPart > songStructure.Count)
+                        if (actualPart >= songStructure.Count)
                         {
                             actualPart = 0;
                         }
@@ -143,7 +147,7 @@ public class Mary : PjBase
                         break;
                     case 4:
                         actualPart++;
-                        if (actualPart > songStructure.Count)
+                        if (actualPart >= songStructure.Count)
                         {
                             actualPart = 0;
                         }
@@ -224,7 +228,7 @@ public class Mary : PjBase
                 break;
 
             case 2:
-                HabSelectArea(HabTargetType.ally, h2Area, transform.position);
+                HabSelectArea(HabTargetType.ally, h2Area, transform.position, false);
                 break;
 
             case 3:
@@ -256,38 +260,45 @@ public class Mary : PjBase
     public override string GetHabDescription(int hab)
     {
         string partText;
+        string allyText;
+        string enemyText;
         switch (songStructure[actualPart])
         {
             case SongParts.opening:
-                partText = "Opening\nAliados: Otorga un escudo de " + CalculateControl(oAShieldAmount).ToString("F0") + " que dura " + oAShieldDuration + " rondas\n" +
-                    "Enemigos: Aturde a los enemigos y les inflige " + CalculateSinergy(oEDmg) + " de daño";
+                partText = "Opening\n";
+                allyText = "Aliados: Otorga un escudo de " + CalculateControl(oAShieldAmount).ToString("F0") + " que dura " + oAShieldDuration + " rondas";
+                enemyText = "Enemigos: Aturde a los enemigos y les inflige " + CalculateSinergy(oEDmg) + " de daño";
                 break;
             case SongParts.verse:
-                partText = "Estrofa\nAliados: Otorga un potenciador a los aliados de " + CalculateControl(vAStatsToChange.pot).ToString("F0") + " que dura " + vAPotDuration +
+                partText = "Estrofa\n";
+                allyText = "Aliados: Otorga un potenciador a los aliados de " + CalculateControl(vAStatsToChange.pot).ToString("F0") + " que dura " + vAPotDuration +
                     " rondas, si los aliados están extenuados purifica el debufo en su lugar. " +
-                    "Si Mary se bufa a sí misma también aumenta su control, pero solo puede tener un bufo activo de este tipo.\n" +
-                    "Enemigos: Daña a los objetivos por " + CalculateSinergy(vEDmg) + " y los extenúa un " + CalculateControl(vEStatsToChange.pot).ToString("F0") + " durante 2 rondas";
+                    "Si Mary se bufa a sí misma también aumenta su control, pero solo puede tener un bufo activo de este tipo";
+                enemyText = "Enemigos: Daña a los objetivos por " + CalculateSinergy(vEDmg) + " y los extenúa un " + CalculateControl(vEStatsToChange.pot).ToString("F0") + " durante 2 rondas";
                 break;
             case SongParts.chorus:
-                partText = "Estribillo\nAliados: Otorga una curación de " + CalculateControl(cAHeal).ToString("F0") + " a los aliados\n" +
-                    "Enemigos: Daña a los objetivos por " + CalculateSinergy(cEDmg);
+                partText = "Estribillo\n";
+                allyText = "Aliados: Otorga una curación de " + CalculateControl(cAHeal).ToString("F0") + " a los aliados";
+                enemyText = "Enemigos: Daña a los objetivos por " + CalculateSinergy(cEDmg);
                 break;
             default:
                 partText = "";
+                allyText = "";
+                enemyText = "";
                 break;
         }
         switch (hab)
         {
             default:
-                return "Mary toca una cancion durante la batalla, cada vez que se usa una habilidad la canción avanza así como sus efectos.\n\nParte actual:\n" + partText;
+                return "Mary toca una cancion durante la batalla, cada vez que se usa una habilidad la canción avanza así como sus efectos.\n\nParte actual: " + partText + allyText + "\n" + enemyText;
             case 1:
-                return "Toca para un solo enemigo o aliado, afectándole con la parte actual de la canción\n\nParte actual:\n" + partText;
+                return "Toca para un solo enemigo o aliado, afectándole con la parte actual de la canción\n\nParte actual:\n" + partText + allyText;
             case 2:
-                return "Toca alrededor suyo afectando a sus aliados, afectándoles con la parte actual de la canción\n\nParte actual:\n" + partText;
+                return "Toca alrededor suyo afectando a sus aliados, afectándoles con la parte actual de la canción\n\nParte actual:\n" + partText + allyText + "\n" + enemyText;
             case 3:
-                return "Toca para los enemigos delante de ella, afectándoles con la parte actual de la canción\n\nParte actual:\n" + partText;
+                return "Toca para los enemigos delante de ella, afectándoles con la parte actual de la canción\n\nParte actual:\n" + partText + enemyText;
             case 4:
-                return "Toca para sí misma, afectándose con la parte actual de la canción\n\nParte actual:\n" + partText;
+                return "Toca para sí misma, afectándose con la parte actual de la canción\n\nParte actual:\n" + partText + allyText;
         }
     }
 }

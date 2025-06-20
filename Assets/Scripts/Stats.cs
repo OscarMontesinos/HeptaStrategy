@@ -15,17 +15,25 @@ public class Stats
     [HideInInspector]
     public float regen;
     [HideInInspector]
-    public float pot;
-    [HideInInspector]
     public float shield;
     public float sinergy;
     public float strength;
     public float control;
     public float fRes;
     public float mRes;
-    [HideInInspector]
-    public float res;
     public float spd;
     public int movement = 4;
+    [HideInInspector]
+    public float pot;
+    [HideInInspector]
+    public float extraCon;
+    [HideInInspector]
+    public float res;
+    [HideInInspector]
+    public float extraFRes;
+    [HideInInspector]
+    public float extraMRes;
+    [HideInInspector]
+    public float extraSpd;
     public int extraMov;
 }

@@ -204,16 +204,20 @@ MonoBehaviour:
     mHp: 85
     hp: 0
     regen: 0
-    pot: 0
     shield: 0
     sinergy: 15
     strength: 45
     control: 30
     fRes: 50
     mRes: 20
-    res: 0
     spd: 5
     movement: 4
+    pot: 0
+    extraCon: 0
+    res: 0
+    extraFRes: 0
+    extraMRes: 0
+    extraSpd: 0
     extraMov: 0
   buffList: []
   invocationList: []
@@ -222,6 +226,7 @@ MonoBehaviour:
   turno: 0
   hasTurn: 0
   habSelected: 0
+  turnHabSelected: 0
   turnIndicator: {fileID: 8901249484603620929}
   hSelectedIndicator: {fileID: 6334909021977349656}
   stunIndicator: {fileID: 3009964785529873863}
@@ -250,6 +255,7 @@ MonoBehaviour:
   h3Dmg: 40
   h3StatsToChange:
     pot: 0
+    con: 0
     res: 55
     fRes: 0
     mRes: 0

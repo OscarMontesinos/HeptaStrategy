@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public GameObject UIPj;
-    bool isActive = true;
+    bool isActive = false;
     PjBase pj;
     public TextMeshProUGUI turnoTxt;
     public TextMeshProUGUI statsTxt;
@@ -90,9 +90,9 @@ public class UIManager : MonoBehaviour
             statsTxt.text = pj.CalculateSinergy(100).ToString("F0") + "\n" +
                             pj.CalculateStrength(100).ToString("F0") + "\n" +
                             pj.CalculateControl(100).ToString("F0") + "\n" +
-                            (pj.stats.fRes + pj.stats.res).ToString("F0") + "\n" +
-                            (pj.stats.mRes + pj.stats.res).ToString("F0") + "\n" +
-                            pj.stats.spd.ToString("F0") + "\n" +
+                            (pj.stats.fRes + pj.stats.extraFRes + pj.stats.res).ToString("F0") + "\n" +
+                            (pj.stats.mRes + pj.stats.extraMRes + pj.stats.res).ToString("F0") + "\n" +
+                            (pj.stats.spd + pj.stats.extraSpd).ToString("F0") + "\n" +
                             (pj.stats.movement + pj.stats.extraMov).ToString("F0");
 
             if(pj.stats.pot > 0)
@@ -117,26 +117,52 @@ public class UIManager : MonoBehaviour
                 strengthIndicator.transform.GetChild(1).gameObject.SetActive(false);
             }
 
-            if (pj.stats.res > 0)
+            if (pj.stats.res + pj.stats.extraMRes > 0)
             {
-                prIndicator.transform.GetChild(0).gameObject.SetActive(true);
                 mrIndicator.transform.GetChild(0).gameObject.SetActive(true);
-                prIndicator.transform.GetChild(1).gameObject.SetActive(false);
                 mrIndicator.transform.GetChild(1).gameObject.SetActive(false);
             }
-            else if (pj.stats.res < 0)
+            else if (pj.stats.res + pj.stats.extraMRes < 0)
             {
-                prIndicator.transform.GetChild(0).gameObject.SetActive(false);
                 mrIndicator.transform.GetChild(0).gameObject.SetActive(false);
-                prIndicator.transform.GetChild(1).gameObject.SetActive(true);
                 mrIndicator.transform.GetChild(1).gameObject.SetActive(true);
             }
             else
             {
-                prIndicator.transform.GetChild(0).gameObject.SetActive(false);
                 mrIndicator.transform.GetChild(0).gameObject.SetActive(false);
-                prIndicator.transform.GetChild(1).gameObject.SetActive(false);
                 mrIndicator.transform.GetChild(1).gameObject.SetActive(false);
+            }
+
+            if (pj.stats.res + pj.stats.extraFRes > 0)
+            {
+                prIndicator.transform.GetChild(0).gameObject.SetActive(true);
+                prIndicator.transform.GetChild(1).gameObject.SetActive(false);
+            }
+            else if (pj.stats.res + pj.stats.extraFRes < 0)
+            {
+                prIndicator.transform.GetChild(0).gameObject.SetActive(false);
+                prIndicator.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else
+            {
+                prIndicator.transform.GetChild(0).gameObject.SetActive(false);
+                prIndicator.transform.GetChild(1).gameObject.SetActive(false);
+            }
+
+            if (pj.stats.extraSpd > 0)
+            {
+                spdIndicator.transform.GetChild(0).gameObject.SetActive(true);
+                spdIndicator.transform.GetChild(1).gameObject.SetActive(false);
+            }
+            else if (pj.stats.extraSpd < 0)
+            {
+                spdIndicator.transform.GetChild(0).gameObject.SetActive(false);
+                spdIndicator.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else
+            {
+                spdIndicator.transform.GetChild(0).gameObject.SetActive(false);
+                spdIndicator.transform.GetChild(1).gameObject.SetActive(false);
             }
 
             habNameTxt.text = pj.GetHabName(pj.habSelected);

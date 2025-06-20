@@ -30,12 +30,12 @@ public class Buff : MonoBehaviour
 
 
         this.statsToChange.pot = user.CalculateControl(statsToChange.pot);
-        this.statsToChange.control = user.CalculateControl(statsToChange.con);
         this.statsToChange.res = user.CalculateControl(statsToChange.res);
-        this.statsToChange.mRes = user.CalculateControl(statsToChange.mRes);
-        this.statsToChange.fRes = user.CalculateControl(statsToChange.fRes);
-        this.statsToChange.spd = user.CalculateControl(statsToChange.spd);
+        this.statsToChange.extraMRes = user.CalculateControl(statsToChange.mRes);
+        this.statsToChange.extraFRes = user.CalculateControl(statsToChange.fRes);
+        this.statsToChange.extraSpd = user.CalculateControl(statsToChange.spd);
         this.statsToChange.regen = user.CalculateControl(statsToChange.regen);
+        this.statsToChange.extraCon = user.CalculateControl(statsToChange.con);
         this.statsToChange.movement = statsToChange.movement;
         if (target.turno)
         {
@@ -45,20 +45,20 @@ public class Buff : MonoBehaviour
         if (isDebuff)
         {
             this.statsToChange.pot = -this.statsToChange.pot;
-            this.statsToChange.control = -this.statsToChange.control;
+            this.statsToChange.extraCon = -this.statsToChange.extraCon;
             this.statsToChange.res = -this.statsToChange.res;
-            this.statsToChange.mRes = -this.statsToChange.mRes;
-            this.statsToChange.fRes = -this.statsToChange.fRes;
-            this.statsToChange.spd = -this.statsToChange.spd;
+            this.statsToChange.extraMRes = -this.statsToChange.mRes;
+            this.statsToChange.extraFRes = -this.statsToChange.fRes;
+            this.statsToChange.extraSpd = -this.statsToChange.spd;
             this.statsToChange.movement = -this.statsToChange.movement;
             this.statsToChange.regen = -this.statsToChange.regen;
         }
         target.stats.pot += this.statsToChange.pot;
-        target.stats.control += this.statsToChange.control;
+        target.stats.extraCon += this.statsToChange.extraCon;
         target.stats.res += this.statsToChange.res;
-        target.stats.mRes += this.statsToChange.mRes;
-        target.stats.fRes += this.statsToChange.fRes;
-        target.stats.spd += this.statsToChange.spd;
+        target.stats.extraMRes += this.statsToChange.extraMRes;
+        target.stats.extraFRes += this.statsToChange.extraFRes;
+        target.stats.extraSpd += this.statsToChange.extraSpd;
         target.stats.movement += this.statsToChange.movement;
         target.stats.regen += this.statsToChange.regen;
 
@@ -84,15 +84,11 @@ public class Buff : MonoBehaviour
     public virtual void Reset()
     {
         target.stats.pot -= statsToChange.pot;
-        target.stats.control -= statsToChange.control;
+        target.stats.extraCon -= statsToChange.extraCon;
         target.stats.res -= statsToChange.res;
-        target.stats.strength -= statsToChange.pot;
-        target.stats.sinergy -= statsToChange.pot;
-        target.stats.spd -= statsToChange.spd;
-        target.stats.fRes -= statsToChange.res;
-        target.stats.fRes -= statsToChange.fRes;
-        target.stats.mRes -= statsToChange.res;
-        target.stats.mRes -= statsToChange.mRes;
+        target.stats.extraFRes -= statsToChange.extraFRes;
+        target.stats.extraMRes -= statsToChange.extraMRes;
+        target.stats.extraSpd -= statsToChange.extraSpd;
         target.stats.movement -= statsToChange.movement;
         target.stats.regen -= statsToChange.regen;
     }

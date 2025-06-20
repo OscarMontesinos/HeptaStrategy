@@ -280,7 +280,7 @@ public class PjBase : MonoBehaviour
     }
     public virtual float CalculateControl(float value)
     {
-        return value * stats.control / 100;
+        return value * (stats.control + stats.extraCon) / 100;
     }
 
     public virtual void DealDmg(PjBase target, DmgType dmgType, float dmgAmount)
@@ -294,11 +294,11 @@ public class PjBase : MonoBehaviour
 
         if (dmgType == DmgType.magical)
         {
-            calculo = stats.mRes + stats.res;
+            calculo = stats.mRes + stats.extraMRes + stats.res;
         }
         else
         {
-            calculo = stats.fRes + stats.res;
+            calculo = stats.fRes + stats.extraFRes + stats.res;
         }
 
         if (calculo < 0)
@@ -590,7 +590,7 @@ public class PjBase : MonoBehaviour
     }
     public void HabSelectArea(HabTargetType habTargetType, int area, Vector2 originPos)
     {
-        HabSelectArea(habTargetType, area, originPos, false);
+        HabSelectArea(habTargetType, area, originPos, true);
     }
 
     public void HabSelectArea(HabTargetType habTargetType, int area, Vector2 originPos, bool selectSelf)
@@ -614,11 +614,7 @@ public class PjBase : MonoBehaviour
                 foreach (Collider2D enemyColl in enemiesHit)
                 {
                     pj = enemyColl.GetComponent<PjBase>();
-                    if (pj.team != team && !selectSelf)
-                    {
-                        pj.HSelect(true);
-                    }
-                    else if(selectSelf && pj==this)
+                    if (pj.team != team)
                     {
                         pj.HSelect(true);
                     }
@@ -629,7 +625,11 @@ public class PjBase : MonoBehaviour
                 foreach (Collider2D enemyColl in enemiesHit)
                 {
                     pj = enemyColl.GetComponent<PjBase>();
-                    if (pj.team == team)
+                    if (pj.team == team && pj != this)
+                    {
+                        pj.HSelect(true);
+                    }
+                    else if (selectSelf && pj == this)
                     {
                         pj.HSelect(true);
                     }
@@ -639,7 +639,14 @@ public class PjBase : MonoBehaviour
                 foreach (Collider2D enemyColl in enemiesHit)
                 {
                     pj = enemyColl.GetComponent<PjBase>();
-                    pj.HSelect(true);
+                    if (pj != this)
+                    {
+                        pj.HSelect(true);
+                    }
+                    else if (selectSelf && pj == this)
+                    {
+                        pj.HSelect(true);
+                    }
                 }
                 break;
         }

@@ -105,9 +105,9 @@ public class Namir : PjBase
                                         DealDmg(target, DmgType.phisical, CalculateControl(h2ExtraDmg));
                                     }
 
-                                    Vector2 dir = target.transform.position - transform.position;
+                                    Vector2 dir2 = target.transform.position - transform.position;
                                     transform.position = target.transform.position;
-                                    transform.Translate(-dir.normalized);
+                                    transform.Translate(-dir2.normalized);
                                 }
                             }
                         }
@@ -137,8 +137,7 @@ public class Namir : PjBase
                                         DealDmg(target, DmgType.phisical, CalculateControl(h3ExtraDmg));
                                     }
 
-                                    Vector2 dir = UtilsClass.GetMouseWorldPosition() - transform.position;
-                                    transform.Translate(dir.normalized * (h3Range + 1));
+                                    
                                 }
                             }
                         }
@@ -146,9 +145,13 @@ public class Namir : PjBase
                         if (activated)
                         {
                             pCharges++;
+                        }
+
+                        Vector2 dir = UtilsClass.GetMouseWorldPosition() - transform.position;
+                        transform.Translate(dir.normalized * (h3Range + 1));
+                        
                             h3CurrentCd = h3Cd + 1;
                             stats.turn -= h3Turn;
-                        }
 
                         habSelected = 0;
                         GameManager.Instance.UnselectAll();

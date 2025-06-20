@@ -66,25 +66,21 @@ public class RockScorpion : PjBase
                             {
                                 if (target.hSelected && target != this)
                                 {
-                                    activated = true;
                                     DealDmg(target, DmgType.phisical, CalculateStrength(h2Dmg));
 
                                     Buff debuff = target.gameObject.AddComponent<Buff>();
                                     debuff.NormalSetUp(this, target, h2StatsToChange, h2Duration, null, true);
                                     target.buffList.Add(debuff);
 
-                                    Vector2 dir = UtilsClass.GetMouseWorldPosition() - transform.position;
-                                    transform.Translate(dir.normalized * (h2Range - 1));
+                                    
                                 }
                             }
                         }
 
-                        if (activated)
-                        {
-                            h2CurrentCd = h2Cd + 1;
-                            stats.turn -= h2Turn;
-                        }
-
+                        Vector2 dir = UtilsClass.GetMouseWorldPosition() - transform.position;
+                        transform.Translate(dir.normalized * (h2Range - 1));
+                        h2CurrentCd = h2Cd + 1;
+                        stats.turn -= h2Turn;
                         habSelected = 0;
                         GameManager.Instance.UnselectAll();
                         DisableIndicators();

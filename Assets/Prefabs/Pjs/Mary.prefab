@@ -45,11 +45,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484304, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.9727793
+      value: -0.05209899
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484304, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.123191
+      value: 8.096605
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484304, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -152,16 +152,20 @@ MonoBehaviour:
     mHp: 35
     hp: 0
     regen: 0
-    pot: 0
     shield: 0
     sinergy: 30
     strength: 5
     control: 49
     fRes: 25
     mRes: 25
-    res: 0
     spd: 31
     movement: 4
+    pot: 0
+    extraCon: 0
+    res: 0
+    extraFRes: 0
+    extraMRes: 0
+    extraSpd: 0
     extraMov: 0
   buffList: []
   invocationList: []
@@ -186,8 +190,9 @@ MonoBehaviour:
   extensionIndicator: {fileID: 4487689533072906007}
   songStructure: 000000000100000002000000010000000200000002000000
   oAShieldAmount: 50
-  oAShieldDuration: 2
+  oAShieldDuration: 1
   oEDmg: 35
+  vAFx: {fileID: 8337509113384579834, guid: 8b313491ae7fd3041a7776dec436c890, type: 3}
   vAStatsToChange:
     pot: 22.5
     con: 0
@@ -197,8 +202,9 @@ MonoBehaviour:
     spd: 0
     movement: 0
     regen: 0
-  vAPotDuration: 2
+  vAPotDuration: 1
   vEDmg: 20
+  vEFx: {fileID: 8337509113384579834, guid: 68c52bccaef86b248aa61c579c0620af, type: 3}
   vEStatsToChange:
     pot: 22.5
     con: 0
@@ -208,7 +214,7 @@ MonoBehaviour:
     spd: 0
     movement: 0
     regen: 0
-  vEPotDuration: 2
+  vEPotDuration: 1
   cAHeal: 25
   cEDmg: 50
   h1MaxRTimes: 1
