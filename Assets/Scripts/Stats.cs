@@ -23,17 +23,13 @@ public class Stats
     public float mRes;
     public float spd;
     public int movement = 4;
-    [HideInInspector]
+    [Header("Buffs")]
     public float pot;
-    [HideInInspector]
     public float extraCon;
-    [HideInInspector]
     public float res;
-    [HideInInspector]
     public float extraFRes;
     [HideInInspector]
     public float extraMRes;
-    [HideInInspector]
     public float extraSpd;
     public int extraMov;
 }

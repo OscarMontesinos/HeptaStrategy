@@ -7,8 +7,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1694183438789544873, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 829911853704491088, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 829911853704491088, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3106645492383595013, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
@@ -29,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.b
-      value: 0.9245283
+      value: 0.4339623
       objectReference: {fileID: 0}
     - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.g
-      value: 0.64125466
+      value: 0.4339623
       objectReference: {fileID: 0}
     - target: {fileID: 7849232380632131495, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.r
-      value: 0.501513
+      value: 0.4339623
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484304, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_RootOrder
@@ -85,19 +89,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484305, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.b
-      value: 0.9150943
+      value: 0.20518868
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484305, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.g
-      value: 0.7195664
+      value: 0.7031551
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484305, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Color.r
-      value: 0.5913581
+      value: 0.8207547
       objectReference: {fileID: 0}
     - target: {fileID: 8345205438217484310, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
       propertyPath: m_Name
-      value: Loana
+      value: Wolf
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6660742372777506698, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
@@ -132,7 +136,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8345205438217484310, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}
   m_PrefabInstance: {fileID: 4487689534776536686}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3714568374922944067
+--- !u!114 &7591536591255841429
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,24 +145,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 5591036399056557688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cac0c97afde90984481f486404a9482a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e4c9d6e83dea004e958164e0cd88ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  team: 0
   stats:
     lvl: 5
     turn: 5
     size: 1
-    mHp: 65
+    mHp: 30
     hp: 0
     regen: 0
     shield: 0
-    sinergy: 25
-    strength: 5
-    control: 25
-    fRes: 25
-    mRes: 25
-    spd: 10
+    sinergy: 5
+    strength: 30
+    control: 5
+    fRes: 30
+    mRes: 10
+    spd: 25
     movement: 4
     pot: 0
     extraCon: 0
@@ -188,47 +192,16 @@ MonoBehaviour:
   singleIndicator: {fileID: 8353221101954409829}
   areaIndicator: {fileID: 459237404752043217}
   extensionIndicator: {fileID: 4487689533072906007}
-  pAmount: 55
+  pMultiplier: 25
   h1MaxRTimes: 2
   h1Turn: 2
-  h1Range: 1
-  h1Dmg: 50
-  h1ExtraDmg: 45
+  h1Range: 2
+  h1Dmg: 25
   h2Cd: 1
   h2Turn: 2
-  h2Range: 5
-  h2Wide: 3
-  h2Dmg: 40
-  h2ExtraDmg: 45
-  h2StatsToChange:
-    pot: 60
-    con: 0
-    res: 0
-    fRes: 0
-    mRes: 0
-    spd: 0
-    movement: 0
-    regen: 0
-  h2Duration: 2
-  h3Cd: 5
-  h3Turn: 3
-  h3Area: 5
-  h3Duration: 2
-  h3Bubble: {fileID: 3312770111448397337, guid: 9fa9893661f983b42b702ad2f1fa846b, type: 3}
-  h4Cd: 1
-  h4Turn: 2
-  h4Pasive: 0
-  h4Stun: 0
-  h4StatsToChange:
-    pot: 0
-    con: 0
-    res: 160
-    fRes: 0
-    mRes: 0
-    spd: 0
-    movement: 0
-    regen: 0
-  h4Duration: 1
+  h2Range: 2
+  h2RangeDash: 2
+  h2Dmg: 20
 --- !u!114 &5796051908906568575 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7937822330784195857, guid: 4229ae88c9f378c44947f27bf47d93b7, type: 3}

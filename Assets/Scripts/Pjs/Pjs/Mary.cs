@@ -246,15 +246,15 @@ public class Mary : PjBase
         switch (hab)
         {
             default:
-                return "Armadura oceánica";
+                return "Música emocional";
             case 1:
-                return "Filo de plata";
+                return "Dedicatoria";
             case 2:
-                return "Onda acuática";
+                return "Concierto";
             case 3:
-                return "Burbuja protectora";
+                return "Crescendo";
             case 4:
-                return "Hoja y coraza";
+                return "Tarareo";
         }
     }
     public override string GetHabDescription(int hab)
@@ -267,19 +267,19 @@ public class Mary : PjBase
             case SongParts.opening:
                 partText = "Opening\n";
                 allyText = "Aliados: Otorga un escudo de " + CalculateControl(oAShieldAmount).ToString("F0") + " que dura " + oAShieldDuration + " rondas";
-                enemyText = "Enemigos: Aturde a los enemigos y les inflige " + CalculateSinergy(oEDmg) + " de daño";
+                enemyText = "Enemigos: Aturde a los enemigos y les inflige " + CalculateSinergy(oEDmg).ToString("F0") + " de daño";
                 break;
             case SongParts.verse:
                 partText = "Estrofa\n";
                 allyText = "Aliados: Otorga un potenciador a los aliados de " + CalculateControl(vAStatsToChange.pot).ToString("F0") + " que dura " + vAPotDuration +
                     " rondas, si los aliados están extenuados purifica el debufo en su lugar. " +
                     "Si Mary se bufa a sí misma también aumenta su control, pero solo puede tener un bufo activo de este tipo";
-                enemyText = "Enemigos: Daña a los objetivos por " + CalculateSinergy(vEDmg) + " y los extenúa un " + CalculateControl(vEStatsToChange.pot).ToString("F0") + " durante 2 rondas";
+                enemyText = "Enemigos: Daña a los objetivos por " + CalculateSinergy(vEDmg).ToString("F0") + " y los extenúa un " + CalculateControl(vEStatsToChange.pot).ToString("F0") + " durante 2 rondas";
                 break;
             case SongParts.chorus:
                 partText = "Estribillo\n";
                 allyText = "Aliados: Otorga una curación de " + CalculateControl(cAHeal).ToString("F0") + " a los aliados";
-                enemyText = "Enemigos: Daña a los objetivos por " + CalculateSinergy(cEDmg);
+                enemyText = "Enemigos: Daña a los objetivos por " + CalculateSinergy(cEDmg).ToString("F0");
                 break;
             default:
                 partText = "";
@@ -292,7 +292,7 @@ public class Mary : PjBase
             default:
                 return "Mary toca una cancion durante la batalla, cada vez que se usa una habilidad la canción avanza así como sus efectos.\n\nParte actual: " + partText + allyText + "\n" + enemyText;
             case 1:
-                return "Toca para un solo enemigo o aliado, afectándole con la parte actual de la canción\n\nParte actual:\n" + partText + allyText;
+                return "Toca para un solo enemigo o aliado, afectándole con la parte actual de la canción\n\nParte actual:\n" + partText + allyText + "\n" + enemyText;
             case 2:
                 return "Toca alrededor suyo afectando a sus aliados, afectándoles con la parte actual de la canción\n\nParte actual:\n" + partText + allyText + "\n" + enemyText;
             case 3:

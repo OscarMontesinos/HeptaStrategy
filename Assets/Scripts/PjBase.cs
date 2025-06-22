@@ -15,7 +15,6 @@ public class PjBase : MonoBehaviour
 {
     public int team;
     public Stats stats;
-    [HideInInspector]
     public List<Buff> buffList = new List<Buff>();
     [HideInInspector]
     public List<Invocation> invocationList = new List<Invocation>();
@@ -307,6 +306,10 @@ public class PjBase : MonoBehaviour
         }
 
         value *= 1 - (calculo / (calculo + 40 + 1 * user.stats.lvl));
+        if(value <= 1)
+        {
+            value = 1;
+        }
         float originalValue = value;
         while (stats.shield > 0 && value > 0)
         {

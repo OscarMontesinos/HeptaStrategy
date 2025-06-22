@@ -202,7 +202,7 @@ MonoBehaviour:
     spd: 0
     movement: 0
     regen: 0
-  vAPotDuration: 1
+  vAPotDuration: 2
   vEDmg: 20
   vEFx: {fileID: 8337509113384579834, guid: 68c52bccaef86b248aa61c579c0620af, type: 3}
   vEStatsToChange:
@@ -214,18 +214,18 @@ MonoBehaviour:
     spd: 0
     movement: 0
     regen: 0
-  vEPotDuration: 1
+  vEPotDuration: 2
   cAHeal: 25
   cEDmg: 50
   h1MaxRTimes: 1
   h1Turn: 1
-  h1Range: 8
+  h1Range: 7
   h2MaxRTimes: 2
   h2Turn: 2
   h2Area: 4
   h3MaxRTimes: 2
   h3Turn: 2
-  h3Range: 8
+  h3Range: 7
   h3Wide: 3
   h4MaxRTimes: 1
   h4Turn: 1

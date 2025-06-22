@@ -42,9 +42,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        float x = UtilsClass.GetMouseWorldPosition().x;
-        float y = UtilsClass.GetMouseWorldPosition().y;
-
+        selectedCell = GetCell(UtilsClass.GetMouseWorldPosition().x, UtilsClass.GetMouseWorldPosition().y);
+    }
+    public Vector2 GetCell(Vector2 pos)
+    {
+        return GetCell(pos.x, pos.y);
+    }
+    public Vector2 GetCell(float x, float y)
+    {
         if (x % 1 > 0.5f)
         {
             x = x - (x % 1) + 1;
@@ -70,7 +75,8 @@ public class GameManager : MonoBehaviour
         {
             y = y - (y % 1);
         }
-        selectedCell = new Vector2 (x, y);
+
+        return new Vector2(x, y);
     }
     void StartGame()
     {

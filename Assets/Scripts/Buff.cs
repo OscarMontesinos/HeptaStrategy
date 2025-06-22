@@ -17,6 +17,14 @@ public class Buff : MonoBehaviour
     float regen;
     public bool debuff;
 
+    private void Update()
+    {
+        if (!user)
+        {
+            StartCoroutine(Die());
+        }
+    }
+
     public virtual void NormalSetUp(PjBase user, PjBase target, StatsToBuff statsToChange, int duration, GameObject particleFx, bool isDebuff)
     {
         debuff = isDebuff;
