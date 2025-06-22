@@ -149,6 +149,7 @@ MonoBehaviour:
     lvl: 5
     turn: 5
     size: 1
+    mHpMultiplier: 1
     mHp: 65
     hp: 0
     regen: 0

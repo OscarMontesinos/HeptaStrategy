@@ -43,6 +43,7 @@ public class Zafir : PjBase
     public int h3ExtraTurn;
     public int h3Area;
     public float h3ShieldAmount;
+    public int h3ShieldDuration;
     public int h3Range;
     public float h3Dmg;
     public float h3ResBuff;
@@ -158,7 +159,7 @@ public class Zafir : PjBase
                                     {
                                         activated = true;
                                         Shield shield = target.gameObject.AddComponent<Shield>();
-                                        shield.ShieldSetUp(this, target, CalculateControl(h3ShieldAmount), 0, null);
+                                        shield.ShieldSetUp(this, target, CalculateControl(h3ShieldAmount), h3ShieldDuration, null);
                                         target.buffList.Add(shield);
                                         SetBuff(target);
                                     }

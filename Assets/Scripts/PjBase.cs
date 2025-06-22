@@ -10,7 +10,7 @@ using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using static UnityEditor.Rendering.FilterWindow;
 using static UnityEngine.Rendering.DebugUI;
-
+using static TableTopUtils;
 public class PjBase : MonoBehaviour
 {
     public int team;
@@ -91,6 +91,15 @@ public class PjBase : MonoBehaviour
     {
         CalculateStats();
         GameManager.Instance.pjList.Add(this);
+        int enemyCounter = 0;
+        foreach(PjBase pj in GameManager.Instance.pjList)
+        {
+            if(pj.team != team)
+            {
+                enemyCounter++;
+            }
+        }
+        stats.mHp *= stats.mHpMultiplier;
         stats.hp = stats.mHp;
         hpBar.maxValue = stats.mHp;
         shieldBar.maxValue = stats.mHp;
@@ -100,6 +109,12 @@ public class PjBase : MonoBehaviour
             indicatorModifier = 2;
         }
         UpdateUI();
+        StartCoroutine(PostStart());
+    }
+
+    public virtual IEnumerator PostStart()
+    {
+        yield return null;
     }
 
     public virtual void UpdateUI()
@@ -282,6 +297,16 @@ public class PjBase : MonoBehaviour
         return value * (stats.control + stats.extraCon) / 100;
     }
 
+    public virtual float CalculateFRes()
+    {
+        return stats.fRes + stats.extraFRes + stats.res;
+    }
+    
+    public virtual float CalculateMRes()
+    {
+        return stats.mRes + stats.extraMRes + stats.res;
+    }
+
     public virtual void DealDmg(PjBase target, DmgType dmgType, float dmgAmount)
     {
         target.TakeDmg(this, dmgType, dmgAmount);
@@ -293,20 +318,19 @@ public class PjBase : MonoBehaviour
 
         if (dmgType == DmgType.magical)
         {
-            calculo = stats.mRes + stats.extraMRes + stats.res;
+            calculo = CalculateMRes();
         }
         else
         {
-            calculo = stats.fRes + stats.extraFRes + stats.res;
+            calculo = CalculateFRes();
         }
 
         if (calculo < 0)
         {
             calculo = 0;
         }
-
         value *= 1 - (calculo / (calculo + 40 + 1 * user.stats.lvl));
-        if(value <= 1)
+        if (value <= 1)
         {
             value = 1;
         }

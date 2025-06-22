@@ -90,8 +90,8 @@ public class UIManager : MonoBehaviour
             statsTxt.text = pj.CalculateSinergy(100).ToString("F0") + "\n" +
                             pj.CalculateStrength(100).ToString("F0") + "\n" +
                             pj.CalculateControl(100).ToString("F0") + "\n" +
-                            (pj.stats.fRes + pj.stats.extraFRes + pj.stats.res).ToString("F0") + "\n" +
-                            (pj.stats.mRes + pj.stats.extraMRes + pj.stats.res).ToString("F0") + "\n" +
+                            (pj.CalculateFRes()).ToString("F0") + "\n" +
+                            (pj.CalculateMRes()).ToString("F0") + "\n" +
                             (pj.stats.spd + pj.stats.extraSpd).ToString("F0") + "\n" +
                             (pj.stats.movement + pj.stats.extraMov).ToString("F0");
 

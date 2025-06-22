@@ -27,11 +27,20 @@ public class AlphaWolf : PjBase
     public override void Start()
     {
         base.Start();
-        foreach(PjBase target in GameManager.Instance.pjList)
+    }
+
+    public override IEnumerator PostStart()
+    {
+        yield return null;
+
+        foreach (PjBase target in GameManager.Instance.pjList)
         {
-            Buff buff = target.gameObject.AddComponent<Buff>();
-            buff.NormalSetUp(this, target, pStatsToChange, 0, null, false);
-            target.buffList.Add(buff);
+            if (target.team == team && target != this)
+            {
+                Buff buff = target.gameObject.AddComponent<Buff>();
+                buff.NormalSetUp(this, target, pStatsToChange, 0, null, false);
+                target.buffList.Add(buff);
+            }
         }
     }
     public override void Update()
@@ -228,7 +237,7 @@ public class AlphaWolf : PjBase
                 return "Todos sus aliados obtienen "+ CalculateControl(pStatsToChange.res).ToString("F0") + " de resistencias adicionales cuando esta unidad está luchando";
             case 1:
                 return "Muerde al objetivo infligiendo " + CalculateStrength(h1Dmg).ToString("F0") + " de daño, si la vida del enemigo es menor de " + h1HpPercentage + "% " +
-                    "inflige " + CalculateStrength(h1Dmg).ToString("F0") + " de daño en su lugar";
+                    "inflige " + CalculateStrength(h1Dmg + h1ExtraDmg).ToString("F0") + " de daño en su lugar";
             case 2:
                 return "Da una orden y marca como presa a un enemigo";
             case 3:

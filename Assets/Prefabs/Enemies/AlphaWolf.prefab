@@ -153,13 +153,14 @@ MonoBehaviour:
     lvl: 5
     turn: 5
     size: 1
+    mHpMultiplier: 3
     mHp: 50
     hp: 0
     regen: 0
     shield: 0
     sinergy: 5
     strength: 40
-    control: 25
+    control: 40
     fRes: 40
     mRes: 10
     spd: 30
@@ -204,8 +205,8 @@ MonoBehaviour:
   h1MaxRTimes: 2
   h1Turn: 2
   h1Range: 4
-  h1Dmg: 10
-  h1HpPercentage: 40
+  h1Dmg: 20
+  h1HpPercentage: 30
   h1ExtraDmg: 40
   h2Turn: 3
   h2Range: 8

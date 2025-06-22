@@ -149,6 +149,7 @@ MonoBehaviour:
     lvl: 5
     turn: 5
     size: 1
+    mHpMultiplier: 1
     mHp: 35
     hp: 0
     regen: 0
@@ -190,7 +191,7 @@ MonoBehaviour:
   extensionIndicator: {fileID: 4487689533072906007}
   songStructure: 000000000100000002000000010000000200000002000000
   oAShieldAmount: 50
-  oAShieldDuration: 1
+  oAShieldDuration: 2
   oEDmg: 35
   vAFx: {fileID: 8337509113384579834, guid: 8b313491ae7fd3041a7776dec436c890, type: 3}
   vAStatsToChange:

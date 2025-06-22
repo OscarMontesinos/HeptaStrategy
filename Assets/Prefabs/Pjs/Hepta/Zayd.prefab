@@ -148,24 +148,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d5b4ab94fbc04459ee2c2307529fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipTurn: 0
   team: 1
   stats:
     lvl: 5
     turn: 5
+    size: 1
+    mHpMultiplier: 1
     mHp: 40
     hp: 0
     regen: 0
-    pot: 0
     shield: 0
     sinergy: 30
     strength: 5
     control: 45
     fRes: 15
     mRes: 35
-    res: 0
     spd: 10
     movement: 4
+    pot: 0
+    extraCon: 0
+    res: 0
+    extraFRes: 0
+    extraMRes: 0
+    extraSpd: 0
+    extraMov: 0
   buffList: []
   invocationList: []
   isStuned: 0
@@ -173,6 +179,7 @@ MonoBehaviour:
   turno: 0
   hasTurn: 0
   habSelected: 0
+  turnHabSelected: 0
   turnIndicator: {fileID: 8901249484603620929}
   hSelectedIndicator: {fileID: 6334909021977349656}
   stunIndicator: {fileID: 3009964785529873863}
@@ -188,6 +195,7 @@ MonoBehaviour:
   extensionIndicator: {fileID: 4487689533072906007}
   pStatsToChange:
     pot: 30
+    con: 0
     res: 30
     fRes: 0
     mRes: 0
