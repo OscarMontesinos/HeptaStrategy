@@ -98,13 +98,16 @@ public class GameManager : MonoBehaviour
     {
         foreach (PjBase pj in pjList)
         {
-            if(pj.team == 0)
+            if (pj.teamIndicator)
             {
-                pj.teamIndicator.color = team0Color;
-            }
-            else
-            {
-                pj.teamIndicator.color = team1Color;
+                if (pj.team == 0)
+                {
+                    pj.teamIndicator.color = team0Color;
+                }
+                else
+                {
+                    pj.teamIndicator.color = team1Color;
+                }
             }
         }
     }
@@ -163,7 +166,10 @@ public class GameManager : MonoBehaviour
 
     void StartTurn()
     {
-        pjList[actualTurn].GetTurn();
+        if (pjList.Count > 1)
+        {
+            pjList[actualTurn].GetTurn();
+        }
     }
 
     public void UnselectAll()

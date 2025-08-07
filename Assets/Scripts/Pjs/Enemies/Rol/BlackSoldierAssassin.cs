@@ -4,18 +4,19 @@ using UnityEngine;
 using static PjBase;
 using static TableTopUtils;
 
-public class WhiteSoldierGuard : PjBase
+public class BlackSoldierAssassin : PjBase
 {
     public GameObject pMarker;
-    public float pProtAmount;
+    public float pMovAmount;
     public float pArea;
     public int h1MaxRTimes;
     int h1CurrentTimes;
     public int h1Turn;
     public int h1Range;
     public float h1Dmg;
-    public int h2MaxRTimes;
-    int h2CurrentTimes;
+    public float h1PotDmg;
+    public int h2Cd;
+    int h2CurrentCd;
     public int h2Turn;
     public int h2Range;
     public float h2Dmg;
@@ -41,7 +42,14 @@ public class WhiteSoldierGuard : PjBase
                                 if (target.hSelected && target != this)
                                 {
                                     activated = true;
-                                    DealDmg(target, DmgType.phisical, CalculateStrength(h1Dmg));
+                                    if(GetSoldierCount() == 0)
+                                    {
+                                        DealDmg(target, DmgType.phisical, CalculateStrength(h1PotDmg));
+                                    }
+                                    else
+                                    {
+                                        DealDmg(target, DmgType.phisical, CalculateStrength(h1Dmg));
+                                    }
                                 }
                             }
                         }
@@ -65,7 +73,11 @@ public class WhiteSoldierGuard : PjBase
                                     if (target.hSelected && target != this)
                                     {
                                         activated = true;
-                                        DealDmg(target, DmgType.phisical, CalculateStrength(h2Dmg));
+                                        DealDmg(target, DmgType.phisical, CalculateStrength(h2Dmg)); 
+                                        
+                                        Vector2 dir2 = target.transform.position - transform.position;
+                                        transform.position = target.transform.position;
+                                        transform.Translate(dir2.normalized);
                                     }
                                 }
                             }
@@ -73,7 +85,7 @@ public class WhiteSoldierGuard : PjBase
 
                         if (activated)
                         {
-                            h2CurrentTimes--;
+                            h2CurrentCd = h2Cd;
                             stats.turn -= h2Turn;
                         }
 
@@ -104,7 +116,7 @@ public class WhiteSoldierGuard : PjBase
         foreach (Collider2D enemyColl in enemiesHit)
         {
             pj = enemyColl.GetComponent<PjBase>();
-            if ((pj.GetComponent<WhiteSoldierGuard>() || pj.GetComponent<WhiteSoldierLeader>()) && pj != this)
+            if (pj.GetComponent<BlackSoldierAssassin>() && pj != this)
             {
                 soldierCount++;
             }
@@ -112,14 +124,16 @@ public class WhiteSoldierGuard : PjBase
         return soldierCount;
     }
 
-    public override float CalculateFRes()
+    public override float CalculateMov()
     {
-        return base.CalculateFRes() + CalculateControl(GetSoldierCount() * pProtAmount);
-    }
-
-    public override float CalculateMRes()
-    {
-        return base.CalculateFRes() + CalculateControl(GetSoldierCount() * pProtAmount);
+        if (GetSoldierCount() > 0)
+        {
+            return base.CalculateMov();
+        }
+        else
+        {
+            return base.CalculateMov() + pMovAmount;
+        }
     }
 
     public override void GetTurn()
@@ -138,13 +152,16 @@ public class WhiteSoldierGuard : PjBase
     {
         h1CurrentTimes = h1MaxRTimes;
 
-        h2CurrentTimes = h2MaxRTimes;
+        if (h2CurrentCd > 0)
+        {
+            h2CurrentCd--;
+        }
     }
     public override void ManageHabCDsUI()
     {
         UIManager.Instance.habIndicator1.UpdateHab(HabIndicator.CdType.maxR, h1CurrentTimes, false);
 
-        UIManager.Instance.habIndicator2.UpdateHab(HabIndicator.CdType.maxR, h2CurrentTimes, false);
+        UIManager.Instance.habIndicator2.UpdateHab(HabIndicator.CdType.cd, h2CurrentCd, false);
     }
 
     public override void ManageHabInputs()
@@ -153,7 +170,7 @@ public class WhiteSoldierGuard : PjBase
         {
             SelectHab(1, h1Turn);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && stats.turn >= h2Turn && h2CurrentTimes > 0)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && stats.turn >= h2Turn && h2CurrentCd <= 0)
         {
             SelectHab(2, h2Turn);
         }
@@ -183,9 +200,9 @@ public class WhiteSoldierGuard : PjBase
             default:
                 return "Formación coordinada";
             case 1:
-                return "Golpe de espada";
+                return "Puñalada oportunista";
             case 2:
-                return "Ballesta ligera";
+                return "Asalto";
             case 3:
                 return "";
             case 4:
@@ -197,11 +214,12 @@ public class WhiteSoldierGuard : PjBase
         switch (hab)
         {
             default:
-                return "Obtiene " + CalculateControl(pProtAmount).ToString("F0") + " de resistencias por cada soldado blanco cerca de él";
+                return "Si no tiene cerca de él a otro soldado negro obtiene " + CalculateControl(pMovAmount).ToString("F0") + " puntos de movimiento";
             case 1:
-                return "Lanza un espadazo a un objetivo infligiendo " + CalculateStrength(h1Dmg).ToString("F0") + " de daño";
+                return "Lanza una cuchillada con su daga que inflige " + CalculateStrength(h1Dmg).ToString("F0") + " de daño físico si formación coordinada esta" +
+                    " activada hace " + CalculateStrength(h1PotDmg).ToString("F0") + " de daño extra";
             case 2:
-                return "Dispara a un enemigo con su ballesta causando " + CalculateSinergy(h2Dmg).ToString("F0") + " de daño a los objetivo";
+                return "Salta y ataca a un enemigo posicionándose a su espalda haciendo " + CalculateSinergy(h2Dmg).ToString("F0") + " de daño";
             case 3:
                 return "";
             case 4:

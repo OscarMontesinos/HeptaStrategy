@@ -45,6 +45,7 @@ public class Buff : MonoBehaviour
         this.statsToChange.regen = user.CalculateControl(statsToChange.regen);
         this.statsToChange.extraCon = user.CalculateControl(statsToChange.con);
         this.statsToChange.movement = statsToChange.movement;
+        this.statsToChange.extraTurn = statsToChange.turn;
         if (target.turno)
         {
             target.GetHealed(target, this.statsToChange.regen, true);
@@ -60,6 +61,7 @@ public class Buff : MonoBehaviour
             this.statsToChange.extraSpd = -this.statsToChange.spd;
             this.statsToChange.movement = -this.statsToChange.movement;
             this.statsToChange.regen = -this.statsToChange.regen;
+            this.statsToChange.extraTurn = -this.statsToChange.extraTurn;
         }
         target.stats.pot += this.statsToChange.pot;
         target.stats.extraCon += this.statsToChange.extraCon;
@@ -69,6 +71,7 @@ public class Buff : MonoBehaviour
         target.stats.extraSpd += this.statsToChange.extraSpd;
         target.stats.movement += this.statsToChange.movement;
         target.stats.regen += this.statsToChange.regen;
+        target.stats.extraTurn += this.statsToChange.extraTurn;
 
         if (particleFx)
         {
@@ -99,6 +102,7 @@ public class Buff : MonoBehaviour
         target.stats.extraSpd -= statsToChange.extraSpd;
         target.stats.movement -= statsToChange.movement;
         target.stats.regen -= statsToChange.regen;
+        target.stats.extraTurn -= statsToChange.extraTurn;
     }
 
     public virtual IEnumerator Die()

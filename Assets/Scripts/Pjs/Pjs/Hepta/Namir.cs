@@ -108,13 +108,13 @@ public class Namir : PjBase
                                     Vector2 dir2 = target.transform.position - transform.position;
                                     transform.position = target.transform.position;
                                     transform.Translate(-dir2.normalized);
+                                    pCharges++;
                                 }
                             }
                         }
 
                         if (activated)
                         {
-                            pCharges++;
                         h2CurrentCd = h2Cd + 1;
                         stats.turn -= h2Turn;
                         }
@@ -136,15 +136,11 @@ public class Namir : PjBase
                                     {
                                         DealDmg(target, DmgType.phisical, CalculateControl(h3ExtraDmg));
                                     }
+                                    pCharges++;
 
-                                    
+
                                 }
                             }
-                        }
-
-                        if (activated)
-                        {
-                            pCharges++;
                         }
 
                         Vector2 dir = UtilsClass.GetMouseWorldPosition() - transform.position;
@@ -170,6 +166,7 @@ public class Namir : PjBase
                                         Stun(target);
                                         h4Active = false;
                                         stats.movement += h4ExtraMovement;
+                                        pCharges++;
                                     }
                                 }
                             }

@@ -243,7 +243,7 @@ public class PjBase : MonoBehaviour
         ManageHabCDs();
         GetHealed(this, stats.regen, true);
         turnIndicator.SetActive(true);
-        stats.turn = 5;
+        stats.turn = 5 + stats.extraTurn;
         if (isStuned)
         {
             isStuned = false;
@@ -305,6 +305,10 @@ public class PjBase : MonoBehaviour
     public virtual float CalculateMRes()
     {
         return stats.mRes + stats.extraMRes + stats.res;
+    }
+    public virtual float CalculateMov()
+    {
+        return stats.movement + stats.extraMov;
     }
 
     public virtual void DealDmg(PjBase target, DmgType dmgType, float dmgAmount)
@@ -385,11 +389,11 @@ public class PjBase : MonoBehaviour
             UpdateUI();
         }
     }
-    public virtual void Stun(PjBase user)
+    public virtual void Stun(PjBase target)
     {
-        if (!user.wasJustStuned)
+        if (!target.wasJustStuned)
         {
-            user.GetStunned();
+            target.GetStunned();
         }
     }
     public virtual void GetStunned()

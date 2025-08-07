@@ -33,4 +33,5 @@ public class Stats
     public float extraMRes;
     public float extraSpd;
     public int extraMov;
+    public int extraTurn;
 }

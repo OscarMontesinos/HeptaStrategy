@@ -191,7 +191,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 660fc343cf268ff40ae58d7e1440f0b2, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.4}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -373,17 +373,17 @@ MonoBehaviour:
     lvl: 5
     turn: 5
     size: 1
-    mHpMultiplier: 3
+    mHpMultiplier: 2
     mHp: 55
     hp: 0
     regen: 0
     shield: 0
     sinergy: 5
     strength: 45
-    control: 35
+    control: 45
     fRes: 25
     mRes: 40
-    spd: 15
+    spd: 10
     movement: 4
     pot: 0
     extraCon: 0
@@ -392,6 +392,7 @@ MonoBehaviour:
     extraMRes: 0
     extraSpd: 0
     extraMov: 0
+    extraTurn: 0
   buffList: []
   invocationList: []
   isStuned: 0
@@ -414,20 +415,20 @@ MonoBehaviour:
   areaIndicator: {fileID: 459237404752043217}
   extensionIndicator: {fileID: 4487689533072906007}
   pMarker: {fileID: 5891958909028572835}
-  pPotAmount: 17.5
+  pPotAmount: 12.5
   pArea: 4
   h1MaxRTimes: 2
   h1Turn: 2
   h1Range: 1
-  h1Dmg: 40
+  h1Dmg: 35
   h2MaxRTimes: 2
   h2Turn: 2
   h2Range: 5
-  h2Dmg: 40
+  h2Dmg: 35
   h3Cd: 4
-  h3Turn: 3
-  h3ShieldAmount: 40
-  h3ExtraShieldAmount: 25
+  h3Turn: 1
+  h3ShieldAmount: 50
+  h3ExtraShieldAmount: 35
   h3ShieldDuration: 2
 --- !u!4 &5591036399056557694 stripped
 Transform:

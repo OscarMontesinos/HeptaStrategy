@@ -2083,20 +2083,26 @@ MonoBehaviour:
     lvl: 5
     turn: 5
     size: 1
+    mHpMultiplier: 1
     mHp: 30
     hp: 10
     regen: 0
-    pot: 0
     shield: 0
     sinergy: 30
     strength: 30
     control: 30
     fRes: 0
     mRes: 0
-    res: 0
     spd: 10
     movement: 4
+    pot: 0
+    extraCon: 0
+    res: 0
+    extraFRes: 0
+    extraMRes: 0
+    extraSpd: 0
     extraMov: 0
+    extraTurn: 0
   buffList: []
   invocationList: []
   isStuned: 0

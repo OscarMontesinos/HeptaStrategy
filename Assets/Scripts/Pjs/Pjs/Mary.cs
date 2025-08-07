@@ -14,7 +14,10 @@ public class Mary : PjBase
     public List<SongParts> songStructure;
     public float oAShieldAmount;
     public int oAShieldDuration;
+    bool oStunn;
     public float oEDmg;
+    public StatsToBuff oEStatsToChange;
+    public int oEDuration;
     public GameObject vAFx;
     public StatsToBuff vAStatsToChange;
     public int vAPotDuration;
@@ -86,7 +89,16 @@ public class Mary : PjBase
                                 switch (songStructure[actualPart])
                                 {
                                     case SongParts.opening:
-                                        Stun(target);
+                                        if (!oStunn)
+                                        {
+                                            Buff buff1 = target.gameObject.AddComponent<Buff>();
+                                            buff1.NormalSetUp(this, target, oEStatsToChange, oEDuration, null, true);
+                                            target.buffList.Add(buff1);
+                                        }
+                                        else
+                                        {
+                                            Stun(target);
+                                        }
                                         DealDmg(target, DmgType.magical, CalculateSinergy(oEDmg));
                                         break;
                                     case SongParts.verse:
@@ -225,6 +237,7 @@ public class Mary : PjBase
 
             case 1:
                 HabSelectSingle(HabTargetType.both, h1Range, transform.position);
+                oStunn = true;
                 break;
 
             case 2:
@@ -233,6 +246,7 @@ public class Mary : PjBase
 
             case 3:
                 HabSelectExtension(HabTargetType.enemy, h3Range, h3Wide, transform.position);
+                oStunn = false;
                 break;
 
             case 4:

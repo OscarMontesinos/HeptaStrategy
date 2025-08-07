@@ -164,6 +164,7 @@ MonoBehaviour:
     extraMRes: 0
     extraSpd: 0
     extraMov: 0
+    extraTurn: 0
   buffList: []
   invocationList: []
   isStuned: 0
@@ -189,7 +190,7 @@ MonoBehaviour:
   h1MaxRTimesPistol: 3
   h1Turn: 2
   h1TurnPistol: 1
-  h1Range: 5
+  h1Range: 4
   h1Dmg: 25
   h2Cd: 1
   h2Turn: 1
@@ -197,11 +198,11 @@ MonoBehaviour:
   h2Dmg: 20
   h3MaxRTimes: 1
   h3Turn: 2
-  h3Range: 7
+  h3Range: 6
   h3Dmg: 35
   h4MaxRTimes: 1
   h4Turn: 1
-  h4Range: 3
+  h4Range: 2
   h4Dmg: 45
 --- !u!114 &5796051908906568575 stripped
 MonoBehaviour:

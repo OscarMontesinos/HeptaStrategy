@@ -191,7 +191,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 660fc343cf268ff40ae58d7e1440f0b2, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.4}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
     lvl: 5
     turn: 5
     size: 1
-    mHpMultiplier: 3
+    mHpMultiplier: 1.5
     mHp: 40
     hp: 0
     regen: 0
@@ -381,9 +381,9 @@ MonoBehaviour:
     sinergy: 5
     strength: 40
     control: 30
-    fRes: 25
+    fRes: 20
     mRes: 25
-    spd: 10
+    spd: 15
     movement: 4
     pot: 0
     extraCon: 0
@@ -392,6 +392,7 @@ MonoBehaviour:
     extraMRes: 0
     extraSpd: 0
     extraMov: 0
+    extraTurn: 0
   buffList: []
   invocationList: []
   isStuned: 0

@@ -168,6 +168,7 @@ MonoBehaviour:
     extraMRes: 0
     extraSpd: 0
     extraMov: 0
+    extraTurn: 0
   buffList: []
   invocationList: []
   isStuned: 0
@@ -193,6 +194,17 @@ MonoBehaviour:
   oAShieldAmount: 50
   oAShieldDuration: 2
   oEDmg: 35
+  oEStatsToChange:
+    pot: 0
+    con: 0
+    res: 0
+    fRes: 0
+    mRes: 0
+    spd: 0
+    movement: 2
+    regen: 0
+    turn: 2
+  oEDuration: 1
   vAFx: {fileID: 8337509113384579834, guid: 8b313491ae7fd3041a7776dec436c890, type: 3}
   vAStatsToChange:
     pot: 22.5
@@ -203,6 +215,7 @@ MonoBehaviour:
     spd: 0
     movement: 0
     regen: 0
+    turn: 0
   vAPotDuration: 2
   vEDmg: 20
   vEFx: {fileID: 8337509113384579834, guid: 68c52bccaef86b248aa61c579c0620af, type: 3}
@@ -215,7 +228,8 @@ MonoBehaviour:
     spd: 0
     movement: 0
     regen: 0
-  vEPotDuration: 2
+    turn: 0
+  vEPotDuration: 1
   cAHeal: 25
   cEDmg: 50
   h1MaxRTimes: 1
