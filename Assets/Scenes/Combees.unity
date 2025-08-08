@@ -184,7 +184,13 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 75c86262b79e6b245ae4a54752f52ab4, type: 3}
     - target: {fileID: 2191939012865104962, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
       propertyPath: m_text
-      value: Combee
+      value: 'Combee 4
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2191939012865104962, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
+      propertyPath: m_fontSize
+      value: 23.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
@@ -383,7 +389,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 75c86262b79e6b245ae4a54752f52ab4, type: 3}
     - target: {fileID: 2191939012865104962, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
       propertyPath: m_text
-      value: Combee
+      value: Combee 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2191939012865104962, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
+      propertyPath: m_fontSize
+      value: 23.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
@@ -566,7 +576,13 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 75c86262b79e6b245ae4a54752f52ab4, type: 3}
     - target: {fileID: 2191939012865104962, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
       propertyPath: m_text
-      value: Combee
+      value: 'Combee 3
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2191939012865104962, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
+      propertyPath: m_fontSize
+      value: 23.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
@@ -747,7 +763,13 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 75c86262b79e6b245ae4a54752f52ab4, type: 3}
     - target: {fileID: 2191939012865104962, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
       propertyPath: m_text
-      value: Combee
+      value: 'Combee 2
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2191939012865104962, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
+      propertyPath: m_fontSize
+      value: 23.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
@@ -812,7 +834,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 75c86262b79e6b245ae4a54752f52ab4, type: 3}
     - target: {fileID: 2191939012865104962, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
       propertyPath: m_text
-      value: Combee
+      value: Combee 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2191939012865104962, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
+      propertyPath: m_fontSize
+      value: 23.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a081877412c3eb4bb207490d07ede22, type: 3}
